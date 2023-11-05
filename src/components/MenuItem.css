@@ -1,0 +1,4 @@
+.menuItem{
+    color:var(--secondary-color);
+    font-size: var(--font-size-content);
+}

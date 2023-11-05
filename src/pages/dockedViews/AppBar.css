@@ -1,0 +1,11 @@
+.appBar {
+    padding: 20px;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: var(--font-size-title);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  

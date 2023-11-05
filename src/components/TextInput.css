@@ -1,0 +1,16 @@
+.textInput{
+    color: var(--weak-color);
+    background-color: transparent;
+
+    font-size: var(--font-size-content);
+
+    border-width: 2px;
+    border-color: var(--weak-color);
+    border-style: none none solid none;
+}
+
+.textInput:focus-visible{
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    outline: none;
+}
