@@ -1,21 +1,55 @@
 import "./TableHeader.css"
+import React, { useState } from 'react';
 
 interface Props {
     title: string
-    sortOrder: "asc" | "desc"
+    resetSortArrow:()=>void;
+    onClick: (event: React.MouseEvent<HTMLButtonElement>, sortOrder: React.SetStateAction<"asc" | "desc" | "none">) => void;
 }
 
 export const TableHeader = (props: Props) => {
+
+    const [sortOrder, setSortOrder] = useState<"asc" | "desc" | "none">("none");
+
+    const resetSortArrow=()=>
+    {
+        setSortOrder("none");
+    }
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        let nextSortOrder: "asc" | "desc" | "none" = sortOrder;
+        switch(sortOrder)
+        {
+            case "none":
+                nextSortOrder="asc";
+            break;
+
+            case "asc":
+                nextSortOrder="desc";
+            break;
+
+            case "desc":
+                nextSortOrder="none";
+            break;
+        }
+        setSortOrder(nextSortOrder);
+        props.onClick(event, nextSortOrder);
+    }
     
     let sortArrow = "";
-    if(props.sortOrder==="asc"){
+    if(sortOrder==="asc"){
         sortArrow = "▲"
     }
-    else if(props.sortOrder==="desc"){
+    else if(sortOrder==="desc"){
         sortArrow = "▼"
+    }
+    else if(sortOrder==="none"){
+        sortArrow = ""
     }
     
     return (
-        <div className="tableHeader">{props.title + sortArrow}</div>
+        <button className="tableHeader" onClick={handleClick}>
+        {props.title + sortArrow}
+    </button>
     )
 }

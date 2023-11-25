@@ -2,10 +2,11 @@ import "./Button.css"
 
 interface Props {
     title: string
+    clickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export const Button = (props: Props) => {
     return (
-        <input className="button" type="button" value={props.title} />
+        <button className="button" type="button" onClick={props.clickHandler}>{props.title}</button>
     )
 }

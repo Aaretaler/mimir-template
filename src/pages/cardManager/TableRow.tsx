@@ -3,14 +3,19 @@ import { Card } from '../../models/Card'
 
 interface Props {
   item: Card
+  handleDeleteButtonClick: (cardId: number) => void;
 }
+export const TableRow: React.FC<Props> = ({ item, handleDeleteButtonClick }) => {
+  const onDeleteClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    handleDeleteButtonClick(item.id);
+  };
 
-export const TableRow = (props: Props) => {
   return (
     <>
-      <div >{props.item.front}</div>
-      <div>{props.item.back}</div>
-      <Button title="Delete"/>
+      <div >{item.front}</div>
+      <div>{item.back}</div>
+      <Button title="Delete" clickHandler={onDeleteClick}/>
     </>
-  )
+  );
 }
+
