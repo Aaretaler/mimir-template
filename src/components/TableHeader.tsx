@@ -1,55 +1,49 @@
-import "./TableHeader.css"
-import React, { useState } from 'react';
+import './TableHeader.css'
 
 interface Props {
-    title: string
-    resetSortArrow:()=>void;
-    onClick: (event: React.MouseEvent<HTMLButtonElement>, sortOrder: React.SetStateAction<"asc" | "desc" | "none">) => void;
+  title: string
+  sortOrder: 'asc' | 'desc' | 'none'
+  setSortOrder: (sortOder: 'asc' | 'desc' | 'none') => void
+  resetSortOrder: (sortOder: 'asc' | 'desc' | 'none') => void
 }
 
-export const TableHeader = (props: Props) => {
+export const TableHeader = ({
+  title,
+  sortOrder,
+  setSortOrder,
+  resetSortOrder,
+}: Props) => {
+  const handleClick = () => {
+    let nextSortOrder: 'asc' | 'desc' | 'none' = sortOrder
+    switch (sortOrder) {
+      case 'none':
+        nextSortOrder = 'asc'
+        break
 
-    const [sortOrder, setSortOrder] = useState<"asc" | "desc" | "none">("none");
+      case 'asc':
+        nextSortOrder = 'desc'
+        break
 
-    const resetSortArrow=()=>
-    {
-        setSortOrder("none");
+      case 'desc':
+        nextSortOrder = 'none'
+        break
     }
+    setSortOrder(nextSortOrder)
+    resetSortOrder('none')
+  }
 
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        let nextSortOrder: "asc" | "desc" | "none" = sortOrder;
-        switch(sortOrder)
-        {
-            case "none":
-                nextSortOrder="asc";
-            break;
+  let sortArrow = ''
+  if (sortOrder === 'asc') {
+    sortArrow = '▲'
+  } else if (sortOrder === 'desc') {
+    sortArrow = '▼'
+  } else if (sortOrder === 'none') {
+    sortArrow = ''
+  }
 
-            case "asc":
-                nextSortOrder="desc";
-            break;
-
-            case "desc":
-                nextSortOrder="none";
-            break;
-        }
-        setSortOrder(nextSortOrder);
-        props.onClick(event, nextSortOrder);
-    }
-    
-    let sortArrow = "";
-    if(sortOrder==="asc"){
-        sortArrow = "▲"
-    }
-    else if(sortOrder==="desc"){
-        sortArrow = "▼"
-    }
-    else if(sortOrder==="none"){
-        sortArrow = ""
-    }
-    
-    return (
-        <button className="invisibleButton" onClick={handleClick}>
-        {props.title + sortArrow}
+  return (
+    <button className="invisibleButton" onClick={handleClick}>
+      {title + sortArrow}
     </button>
-    )
+  )
 }

@@ -1,14 +1,21 @@
-import "./TextInput.css"
-import "./TextInput.css"
+import './TextInput.css'
 
 interface Props {
-    placeholder: string
-    value: string;
-    onChange:(event: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder: string
+  value: string
+  onChange: (text: string) => void
 }
 
 export const TextInput = (props: Props) => {
-    return (
-        <input className="textInput" value={props.value} type="text" placeholder={props.placeholder} onChange={props.onChange} />
-    )
+  return (
+    <input
+      className="textInput"
+      value={props.value}
+      type="text"
+      placeholder={props.placeholder}
+      onChange={e => {
+        props.onChange(e.target.value)
+      }}
+    />
+  )
 }
