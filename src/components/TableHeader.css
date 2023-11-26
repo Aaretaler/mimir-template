@@ -1,3 +1,11 @@
-.tableHeader{
+.invisibleButton{
+
+    font-size: var(--font-size-content);
+
     font-weight: bold;
+    background: none;
+    border: none;
+    text-align: start;
+    padding: 0;
+
 }

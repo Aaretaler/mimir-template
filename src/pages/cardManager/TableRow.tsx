@@ -1,16 +1,22 @@
+import './TableRow.css'
 import { Button } from '../../components/Button'
 import { Card } from '../../models/Card'
+import { Fragment } from 'react'
 
 interface Props {
   item: Card
+  handleDeleteButtonClick: (cardId: number) => void
 }
-
-export const TableRow = (props: Props) => {
+export const TableRow = ({ item, handleDeleteButtonClick }: Props) => {
   return (
-    <>
-      <div >{props.item.front}</div>
-      <div>{props.item.back}</div>
-      <Button title="Delete"/>
-    </>
+    <Fragment key={item.id}>
+      <div className="itemText">{item.front}</div>
+      <div className="itemText">{item.back}</div>
+      <Button
+        title="Delete"
+        clickHandler={_ => {
+          handleDeleteButtonClick(item.id)
+        } } />
+    </Fragment>
   )
 }

@@ -1,11 +1,21 @@
-import "./TextInput.css"
+import './TextInput.css'
 
 interface Props {
-    placeholder: string
+  placeholder: string
+  value: string
+  onChange: (text: string) => void
 }
 
 export const TextInput = (props: Props) => {
-    return (
-        <input className="textInput" type="text" placeholder={props.placeholder} />
-    )
+  return (
+    <input
+      className="textInput"
+      value={props.value}
+      type="text"
+      placeholder={props.placeholder}
+      onChange={e => {
+        props.onChange(e.target.value)
+      }}
+    />
+  )
 }

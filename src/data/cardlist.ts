@@ -3,22 +3,22 @@ import { Card } from '../models/Card'
 const Gegenwart: Card = {
     id: 1,
     front: "Gegenwart",
-  back: "Present"
+    back: "Present"
   }
   const Hour: Card = {
-    id: 1,
+    id: 2,
     front: "Hour",
-  back: "Stunde"
+    back: "Stunde"
   }
   const Minute: Card = {
-    id: 1,
+    id: 3,
     front: "Minute",
-  back: "Minute"
+    back: "Minute"
   }
   const Time: Card = {
-    id: 1,
+    id: 4,
     front: "Time",
-  back: "Zeit"
+    back: "Zeit"
   }
   
  export const cardlist = [Gegenwart, Hour, Minute, Time]
