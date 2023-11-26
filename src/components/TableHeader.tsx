@@ -48,7 +48,7 @@ export const TableHeader = (props: Props) => {
     }
     
     return (
-        <button className="tableHeader" onClick={handleClick}>
+        <button className="invisibleButton" onClick={handleClick}>
         {props.title + sortArrow}
     </button>
     )
