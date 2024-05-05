@@ -1,4 +1,4 @@
-import './Button.css'
+import styles from './Button.module.css';
 
 interface Props {
   title: string
@@ -7,7 +7,7 @@ interface Props {
 
 export const Button = (props: Props) => {
   return (
-    <button className="button" type="button" onClick={props.clickHandler}>
+    <button className={styles.button} type="button" onClick={props.clickHandler}>
       {props.title}
     </button>
   )

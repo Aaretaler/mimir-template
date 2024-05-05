@@ -1,4 +1,4 @@
-import './TableRow.css'
+import styles from './TableRow.module.css';
 import { Button } from '../../components/Button'
 import { Card } from '../../models/Card'
 import { Fragment } from 'react'
@@ -10,8 +10,8 @@ interface Props {
 export const TableRow = ({ item, handleDeleteButtonClick }: Props) => {
   return (
     <Fragment key={item.id}>
-      <div className="itemText">{item.front}</div>
-      <div className="itemText">{item.back}</div>
+      <div className={styles.itemText}>{item.front}</div>
+      <div className={styles.itemText}>{item.back}</div>
       <Button
         title="Delete"
         clickHandler={_ => {
