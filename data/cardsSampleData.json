@@ -1,0 +1,24 @@
+{
+  "cards": [
+    {
+      "id": "1",
+      "front": "Gegenwart",
+      "back": "Present"
+    },
+    {
+      "id": "2",
+      "front": "Hour",
+      "back": "Stunde"
+    },
+    {
+      "id": "3",
+      "front": "Minute",
+      "back": "Minute"
+    },
+    {
+      "id": "4",
+      "front": "Time",
+      "back": "Zeit"
+    }
+  ]
+}

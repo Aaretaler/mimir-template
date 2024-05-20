@@ -3,7 +3,7 @@ import { TableRow } from './TableRow'
 import { Button } from '../../components/Button'
 import { TextInput } from '../../components/TextInput'
 import { Card } from '../../models/Card'
-import { cardlist } from '../../data/cardlist'
+import { cardlist } from '../../../data/cardlist'
 import { useState } from 'react'
 
 export const CardManager = () => {
