@@ -21,7 +21,7 @@ export const TableRow = ({ item, handleDeleteButtonClick,handleEditButtonClick }
         } } />
       <Button
         title="Delete"
-        clickHandler={_ => {
+        clickHandler={() => {
           handleDeleteButtonClick(item.id)
         } } />
         </div>
