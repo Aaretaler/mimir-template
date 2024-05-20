@@ -14,7 +14,7 @@ export const TableRow = ({ item, handleDeleteButtonClick }: Props) => {
       <div className={styles.itemText}>{item.back}</div>
       <Button
         title="Delete"
-        clickHandler={_ => {
+        clickHandler={() => {
           handleDeleteButtonClick(item.id)
         } } />
     </Fragment>

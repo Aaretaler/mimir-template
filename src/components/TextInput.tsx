@@ -1,4 +1,4 @@
-import styles from './TextInput.module.css';
+import styles from './TextInput.module.css'
 
 interface Props {
   placeholder: string
@@ -6,16 +6,12 @@ interface Props {
   onChange: (text: string) => void
 }
 
-export const TextInput = (props: Props) => {
-  return (
-    <input
-      className={styles.textInput}
-      value={props.value}
-      type="text"
-      placeholder={props.placeholder}
-      onChange={e => {
-        props.onChange(e.target.value)
-      }}
-    />
-  )
-}
+export const TextInput = (props: Props) => (
+  <input
+    className={styles.textInput}
+    value={props.value}
+    type="text"
+    placeholder={props.placeholder}
+    onChange={ (e) => props.onChange(e.target.value) }
+  />
+)
