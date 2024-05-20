@@ -1,5 +1,4 @@
-import './TableHeader.css'
-
+import styles from './TableHeader.module.css';
 interface Props {
   title: string
   sortOrder: 'asc' | 'desc' | 'none'
@@ -42,7 +41,7 @@ export const TableHeader = ({
   }
 
   return (
-    <button className="invisibleButton" onClick={handleClick}>
+    <button className={styles.invisibleButton} onClick={handleClick}>
       {title + sortArrow}
     </button>
   )

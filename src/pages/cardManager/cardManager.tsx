@@ -1,4 +1,4 @@
-import './CardManager.css'
+import styles from './CardManager.module.css';
 import { TableRow } from './TableRow'
 import { Button } from '../../components/Button'
 import { TextInput } from '../../components/TextInput'
@@ -23,7 +23,7 @@ export const CardManager = () => {
   const handleSaveButtonClick = () => {
     const newCard = { id: id, front: front, back: back }
     if (front === '' || back === '') {
-      alert('Please fill in all fields')
+      alert('Please fill in all fields!!!')
     } else {
       setId(id + 1)
       setCardList([...cardList, newCard])
@@ -71,7 +71,7 @@ export const CardManager = () => {
 
   return (
     <>
-      <div className="cardManager">
+      <div className={styles.cardManager}>
         {/* Filter Area */}
         <TextInput placeholder="Front" value={front} onChange={setFront} />
         <TextInput placeholder="Back" value={back} onChange={setBack} />
@@ -107,7 +107,7 @@ export const CardManager = () => {
         <div />
 
         {sortAndFilterCards().length === 0 ? (
-          <div className="noData">No Data</div>
+          <div className={styles.noData}>No Data</div>
         ) : (
           sortAndFilterCards().map(card => (
             <TableRow

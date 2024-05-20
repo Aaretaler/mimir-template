@@ -1,3 +1,3 @@
-import './MenuItem.css'
+import styles from './MenuItem.module.css';
 
-export const MenuItem = () => <div className="menuItem">Manage Cards</div>
+export const MenuItem = () => <div className={styles.menuItem}>Manage Cards</div>
