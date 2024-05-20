@@ -44,6 +44,7 @@ export const CardManager = () => {
               key={card.id}
               item={card}
               handleDeleteButtonClick={handleDeleteCard}
+              handleEditButtonClick={handleDeleteCard}
             />
           ))
         )}
