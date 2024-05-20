@@ -1,0 +1,19 @@
+.cardEditor {
+    margin: 20px;
+    display: grid;
+    row-gap: 20px;
+    column-gap: 40px;
+    grid-template-columns: 1fr 1fr auto;
+    max-width: 980px;
+    width: 100%;
+    align-self: center;
+  }
+
+  .tableHeader{
+
+    font-size: var(--font-size-content);
+
+    font-weight: bold;
+    padding: 0;
+
+}

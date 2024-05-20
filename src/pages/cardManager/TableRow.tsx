@@ -6,17 +6,25 @@ import { Fragment } from 'react'
 interface Props {
   item: Card
   handleDeleteButtonClick: (cardId: number) => void
+  handleEditButtonClick: (cardId: number) => void
 }
-export const TableRow = ({ item, handleDeleteButtonClick }: Props) => {
+export const TableRow = ({ item, handleDeleteButtonClick,handleEditButtonClick }: Props) => {
   return (
     <Fragment key={item.id}>
       <div className={styles.itemText}>{item.front}</div>
       <div className={styles.itemText}>{item.back}</div>
+      <div>
+      <Button
+        title="Edit"
+        clickHandler={_ => {
+          handleEditButtonClick(item.id)
+        } } />
       <Button
         title="Delete"
         clickHandler={_ => {
           handleDeleteButtonClick(item.id)
         } } />
+        </div>
     </Fragment>
   )
 }

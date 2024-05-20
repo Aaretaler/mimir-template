@@ -1,6 +1,7 @@
 .button{
     height: 35px;
-    width: 120px;
+    width: 60px;
+    margin: 5px;
 
     border-radius: 7px;
     border: none;

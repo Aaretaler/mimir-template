@@ -7,9 +7,13 @@ import { Card } from '../../models/Card'
 import { cardlist } from '../../data/cardlist'
 import { useState } from 'react'
 
+
 export const CardManager = () => {
   let [back, setBack] = useState('')
   let [front, setFront] = useState('')
+
+
+
   const [id, setId] = useState(5) // Start with 5 to account for sample data IDs (Installation of UUID package is prohibited ;) )
   const [filterActive, setFilterActive] = useState<boolean>(true)
   const [cardList, setCardList] = useState<Card[]>(cardlist)
@@ -34,6 +38,10 @@ export const CardManager = () => {
 
   const handleDeleteCard = (cardId: number) => {
     setCardList(cardList.filter(card => card.id !== cardId))
+  }
+
+  const handleEditCard = (cardId: number) => {
+    alert('Card'+cardId+"Should be modifyed")
   }
 
   const sortAndFilterCards = () => {
@@ -76,6 +84,7 @@ export const CardManager = () => {
         <TextInput placeholder="Front" value={front} onChange={setFront} />
         <TextInput placeholder="Back" value={back} onChange={setBack} />
         <Button title="Save" clickHandler={handleSaveButtonClick} />
+        
         <div />
         <div />
         <div>
@@ -114,6 +123,7 @@ export const CardManager = () => {
               key={card.id}
               item={card}
               handleDeleteButtonClick={handleDeleteCard}
+              handleEditButtonClick={handleEditCard}
             />
           ))
         )}
