@@ -32,12 +32,9 @@ export const CardManager = () => {
   return (
     <>
       <div className={styles.cardManager}>
-        {/* Filter Area */}
         <TextInput placeholder="Front" value={front} onChange={setFront} />
         <TextInput placeholder="Back" value={back} onChange={setBack} />
         <Button title="Save" clickHandler={handleSaveButtonClick} />
-
-        {/* Table */}
 
         {cardList.length === 0 ? (
           <div className={styles.noData}>No Data</div>
