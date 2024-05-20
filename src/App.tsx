@@ -1,7 +1,7 @@
 import styles from './App.module.css'
 import { Route, Routes } from 'react-router-dom'
 import { AppBar } from './pages/dockedViews/AppBar'
-import { CardManager } from './pages/cardManager/cardManager.tsx'
+import { CardManager } from './pages/cardManager/CardManager.tsx'
 import { CardEditor } from './pages/cardEditor/cardEditor.tsx'
 import { Layout } from './layout.tsx'
 

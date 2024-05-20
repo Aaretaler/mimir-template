@@ -79,7 +79,7 @@ export const CardManager = () => {
 
   return (
     <>
-      <div className={styles.cardManager}>
+      <div className={styles.CardManager}>
         {/* Filter Area */}
         <TextInput placeholder="Front" value={front} onChange={setFront} />
         <TextInput placeholder="Back" value={back} onChange={setBack} />
