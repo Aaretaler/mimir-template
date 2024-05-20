@@ -1,4 +1,4 @@
-import { Card } from '../models/Card'
+import { Card } from '../src/models/Card'
 
 const Gegenwart: Card = {
     id: 1,
