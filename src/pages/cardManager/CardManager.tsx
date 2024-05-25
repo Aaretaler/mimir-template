@@ -5,6 +5,7 @@ import { TextInput } from '../../components/TextInput'
 import { Card } from '../../models/Card'
 import { cardlist } from '../../../data/cardlist'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export const CardManager = () => {
   const [back, setBack] = useState('')
@@ -12,6 +13,7 @@ export const CardManager = () => {
   // TODO remove this sample data handling:
   const [id, setId] = useState(5) // Start with 5 to account for sample data IDs (Installation of UUID package is prohibited ;) )
   const [cardList, setCardList] = useState<Card[]>(cardlist)
+  const navigate = useNavigate();
 
   const handleSaveButtonClick = () => {
     const newCard = { id, front, back }
@@ -29,6 +31,10 @@ export const CardManager = () => {
     setCardList(cardList.filter(card => card.id !== cardId))
   }
 
+  const handleEditCard = (cardId: number) => {
+    navigate(`/edit/${cardId}`)
+  }
+
   return (
     <>
       <div className={styles.cardManager}>
@@ -44,7 +50,7 @@ export const CardManager = () => {
               key={card.id}
               item={card}
               handleDeleteButtonClick={handleDeleteCard}
-              handleEditButtonClick={handleDeleteCard}
+              handleEditButtonClick={handleEditCard}
             />
           ))
         )}

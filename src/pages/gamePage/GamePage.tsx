@@ -1,14 +1,9 @@
-import styles from './cardEditor.module.css';
-import { TextInput } from '../../components/TextInput'
-import { Button } from '../../components/Button'
-import { Card } from '../../models/Card'
-import { useState } from 'react'
+import { useState } from "react";
+import { Button } from "../../components/Button";
+import { TextInput } from "../../components/TextInput";
+import styles from './GamePage.module.css'
 
-interface Props {
-    item: Card
-}
-
-export const CardEditor = () => {
+export const GamePage = () => {
     let [back, setBack] = useState('')
     let [front, setFront] = useState('')
 
