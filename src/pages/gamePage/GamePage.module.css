@@ -1,19 +1,40 @@
-.cardEditor {
-    margin: 20px;
-    display: grid;
-    row-gap: 20px;
-    column-gap: 40px;
-    grid-template-columns: 5fr 5fr 2fr;
-    max-width: 980px;
-    width: 100%;
-    align-self: center;
-  }
+.gameState {
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
 
-  .tableHeader{
+  margin: 20px;
+  max-width: 700px;
+  width: 90%;
+}
 
-    font-size: var(--font-size-content);
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
 
-    font-weight: bold;
-    padding: 0;
+  max-width: 500px;
+  width: 70%;
+}
 
+.answerContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.card {
+  max-width: 980px;
+  width: 100%;
+  height: 300px;
+  margin: 20px 0px 30px 0px;
+
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: -2px 2px 7px 3px rgb(0 0 0 / 30%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 }
