@@ -36,5 +36,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  
+}
+
+.themedText{
+  color: var(--secondary-color);
+  font-size: var(--font-size-title);
 }

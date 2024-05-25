@@ -15,12 +15,12 @@ export const GamePage = () => {
   return (
     <>
       <div className={styles.gameState}>
-        <div className={styles.TableHeader}>Progress</div>
+        <div className={styles.themedText}>Progress</div>
         <Button title="Delete" clickHandler={() => null}></Button>
       </div>
 
       <div className={styles.cardContainer}>
-        <div className={styles.card}>Card</div>
+        <div className={`${styles.card} ${styles.themedText}`}>Card</div>
         <div className={styles.answerContainer}>
           <TextInput placeholder="Placeholder" value={back} onChange={setBack} />
           <Button title="Submit" clickHandler={handleEditClick} />
