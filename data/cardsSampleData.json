@@ -1,24 +1,29 @@
 {
   "cards": [
     {
-      "id": "1",
+      "id": "aec44bd8-5058-436c-9d46-10d00517a969",
       "front": "Gegenwart",
       "back": "Present"
     },
     {
-      "id": "2",
+      "id": "9fb8f08a-c73b-48fb-943f-ab52fc088e7c",
       "front": "Hour",
       "back": "Stunde"
     },
     {
-      "id": "3",
+      "id": "051c13aa-cadc-4e66-b0cf-ca69e4a798bb",
+      "front": "Time",
+      "back": "Zeit"
+    },
+    {
+      "id": "24a4bace-4e6a-4a6f-b0d0-2b7e98176f38",
       "front": "Minute",
       "back": "Minute"
     },
     {
-      "id": "4",
-      "front": "Time",
-      "back": "Zeit"
+      "id": "db131d8c-bfc5-4203-ae7e-e1bbcd398c45",
+      "front": "Year",
+      "back": "Jahr"
     }
   ]
 }
