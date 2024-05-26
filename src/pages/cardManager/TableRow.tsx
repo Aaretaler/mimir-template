@@ -5,8 +5,8 @@ import { Fragment } from 'react'
 
 interface Props {
   item: Card
-  handleDeleteButtonClick: (cardId: number) => void
-  handleEditButtonClick: (cardId: number) => void
+  handleDeleteButtonClick: (cardId: string) => void
+  handleEditButtonClick: (cardId: string) => void
 }
 
 export const TableRow = ({

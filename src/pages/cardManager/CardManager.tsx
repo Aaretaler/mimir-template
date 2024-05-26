@@ -2,36 +2,32 @@ import styles from './CardManager.module.css'
 import { TableRow } from './TableRow'
 import { Button } from '../../components/Button'
 import { TextInput } from '../../components/TextInput'
-import { Card } from '../../models/Card'
-import { cardlist } from '../../../data/cardlist'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { AppContext } from '../../store/Context'
+import { v4 as createId } from 'uuid'
 
 export const CardManager = () => {
   const [back, setBack] = useState('')
   const [front, setFront] = useState('')
-  // TODO remove this sample data handling:
-  const [id, setId] = useState(5) // Start with 5 to account for sample data IDs (Installation of UUID package is prohibited ;) )
-  const [cardList, setCardList] = useState<Card[]>(cardlist)
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const { cards, dispatch } = useContext(AppContext)
 
   const handleSaveButtonClick = () => {
-    const newCard = { id, front, back }
     if (front === '' || back === '') {
       alert('Please fill in all fields!!!')
     } else {
-      setId(id + 1)
-      setCardList([...cardList, newCard])
-      setFront('')
-      setBack('')
+      const newCard = { id: createId(), front, back }
+      dispatch({ type: 'add-card', card: newCard })
     }
   }
 
-  const handleDeleteCard = (cardId: number) => {
-    setCardList(cardList.filter(card => card.id !== cardId))
+  const handleDeleteCard = (cardId: string) => {
+    // setCardList(cardList.filter(card => card.id !== cardId))
+    dispatch({ type: 'delete-card', cardId })
   }
 
-  const handleEditCard = (cardId: number) => {
+  const handleEditCard = (cardId: string) => {
     navigate(`/edit/${cardId}`)
   }
 
@@ -42,10 +38,10 @@ export const CardManager = () => {
         <TextInput placeholder="Back" value={back} onChange={setBack} />
         <Button title="Save" clickHandler={handleSaveButtonClick} />
 
-        {cardList.length === 0 ? (
+        {cards.length === 0 ? (
           <div className={styles.noData}>No Data</div>
         ) : (
-          cardList.map(card => (
+          cards.map(card => (
             <TableRow
               key={card.id}
               item={card}
