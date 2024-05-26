@@ -15,15 +15,17 @@ export const CardManager = () => {
 
   const handleSaveButtonClick = () => {
     if (front === '' || back === '') {
-      alert('Please fill in all fields!!!')
+      alert('Please fill in all fields')
     } else {
       const newCard = { id: createId(), front, back }
       dispatch({ type: 'add-card', card: newCard })
+      setBack('')
+      setFront('')
     }
   }
 
+  // TODO: Move these functions to arrow functions 
   const handleDeleteCard = (cardId: string) => {
-    // setCardList(cardList.filter(card => card.id !== cardId))
     dispatch({ type: 'delete-card', cardId })
   }
 
