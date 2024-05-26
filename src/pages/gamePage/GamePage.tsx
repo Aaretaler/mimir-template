@@ -5,7 +5,6 @@ import styles from './GamePage.module.css'
 
 export const GamePage = () => {
   let [back, setBack] = useState('')
-  let [front, setFront] = useState('')
 
   const handleEditClick = () => {
     // Hier kannst du die Logik einfügen, die beim Klick auf den Button ausgeführt werden soll.
