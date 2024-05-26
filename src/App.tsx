@@ -12,7 +12,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<CardManager />}></Route>
         <Route path = "/game" element={<div> game </div>}></Route>
-        <Route path = "/edit" element={<CardEditor/>}></Route>
+        <Route path = "/edit/:id" element={<CardEditor/>}></Route>
       </Route>
     </Routes>
   )

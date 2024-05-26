@@ -5,8 +5,8 @@ import { Fragment } from 'react'
 
 interface Props {
   item: Card
-  handleDeleteButtonClick: (cardId: number) => void
-  handleEditButtonClick: (cardId: number) => void
+  handleDeleteButtonClick: (card: Card) => void
+  handleEditButtonClick: (card: Card) => void
 }
 export const TableRow = ({ item, handleDeleteButtonClick,handleEditButtonClick }: Props) => {
   return (
@@ -17,12 +17,12 @@ export const TableRow = ({ item, handleDeleteButtonClick,handleEditButtonClick }
       <Button
         title="Edit"
         clickHandler={() => {
-          handleEditButtonClick(item.id)
+          handleEditButtonClick(item)
         } } />
       <Button
         title="Delete"
         clickHandler={() => {
-          handleDeleteButtonClick(item.id)
+          handleDeleteButtonClick(item)
         } } />
         </div>
     </Fragment>
