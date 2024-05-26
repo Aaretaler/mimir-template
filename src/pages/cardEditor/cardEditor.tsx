@@ -1,53 +1,40 @@
-import styles from './cardEditor.module.css';
+import styles from './cardEditor.module.css'
 import { TextInput } from '../../components/TextInput'
 import { Button } from '../../components/Button'
-import { Card } from '../../models/Card'
-import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom';
-import { useReducer } from 'react';
-import { reducer } from '../../store/reducer';
-import { useNavigate } from 'react-router-dom'
-import { updateCard } from '../../store/action';
-
-const initialState: Card[] = [];
+import { useContext, useState } from 'react'
+import { AppContext } from '../../store/Context'
+import { useNavigate, useParams } from 'react-router-dom'
 
 export const CardEditor = () => {
-    let [back, setBack] = useState('');
-    let [front, setFront] = useState('');
-    const { id } = useParams<{ id: string }>();
-    const navigate = useNavigate()
+  const navigate = useNavigate()
+  const { cards, dispatch } = useContext(AppContext)
+  const { id } = useParams<{ id: string }>()
+  const card = cards.find(card => card.id === id)
+  let [back, setBack] = useState(card ? card.back : '')
+  let [front, setFront] = useState(card ? card.front : '')
 
-    const [state, dispatch] = useReducer(reducer, initialState);
+  const handleEditClick = () => {
+    if (card) {
+      card.front = front
+      card.back = back
+      dispatch({ type: 'update-card', card })
+      navigate('/cards')
+    }
+  }
 
-    useEffect(() => {
-        if (id) {
-            const selectedCard = getCardById(id);
-            if (selectedCard) {
-                setFront(selectedCard.front);
-                setBack(selectedCard.back);
-            }
-        }
-    }, [id,state]);
-
-    const handleEditClick = () => {
-        console.log("Edit button clicked!");
-        updateCard(state.find((card: Card) => card.id === id),dispatch)
-        navigate('/');
-        
-    };
-
-    const getCardById = (id: string): Card | undefined => {
-        return state.find((card: Card) => card.id === id);// ToDo herrausfinden raum diese Funktion noch nicht tut
-    };
-
-    return (
-        <div className={styles.cardEditor}>
-            <div className={styles.TableHeader}>Front</div>
-            <div className={styles.TableHeader}>Back</div>
-            <div />
-            <TextInput placeholder="" value={front} onChange={setFront} />
-            <TextInput placeholder="" value={back} onChange={setBack} />
-            <Button title="Update" clickHandler={handleEditClick} />
-        </div>
-    )
+  return (
+    <div className={styles.cardEditor}>
+      <div className={styles.TableHeader}>Front</div>
+      <div className={styles.TableHeader}>Back</div>
+      <div />
+      {card && (
+        <TextInput placeholder={card.front} value={front} onChange={setFront} />
+      )}
+      {card && (
+        <TextInput placeholder={card.back} value={back} onChange={setBack} />
+      )}
+      {card && <Button title="Edit" clickHandler={handleEditClick} />}
+      {!card && <div className={styles.TableHeader}>Invalid Card Number</div>}
+    </div>
+  )
 }

@@ -2,44 +2,36 @@ import styles from './CardManager.module.css'
 import { TableRow } from './TableRow'
 import { Button } from '../../components/Button'
 import { TextInput } from '../../components/TextInput'
-import { Card } from '../../models/Card'
-import { useEffect, useState } from 'react'
-import { useReducer } from 'react';
-import { reducer } from '../../store/reducer'
-import { addCard,deleteCard,getcards } from '../../store/action'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { AppContext } from '../../store/Context'
+import { v4 as createId } from 'uuid'
 
 export const CardManager = () => {
   const [back, setBack] = useState('')
   const [front, setFront] = useState('')
-  // TODO remove this sample data handling:
-  const [id, setId] = useState(5) // Start with 5 to account for sample data IDs (Installation of UUID package is prohibited ;) )
   const navigate = useNavigate()
-  const [state, dispatch] = useReducer(reducer, [] as Card[]);
-
-  useEffect(()=>{
-    getcards(dispatch)
-  },[])
+  const { cards, dispatch } = useContext(AppContext)
 
   const handleSaveButtonClick = () => {
-    const newCard = { id, front, back }
-    
     if (front === '' || back === '') {
-      alert('Please fill in all fields!!!')
+      alert('Please fill in all fields')
     } else {
-      setId(id + 1)
-      addCard(newCard, dispatch);      
-      setFront('')
+      const newCard = { id: createId(), front, back }
+      dispatch({ type: 'add-card', card: newCard })
       setBack('')
+      setFront('')
     }
   }
 
-  const handleDeleteCard = (delete1Card: Card) => {
-    deleteCard(delete1Card,dispatch)
+  // TODO: Move these functions to arrow functions 
+  const handleDeleteCard = (cardId: string) => {
+    dispatch({ type: 'delete-card', cardId })
   }
-const handleEditCard =(updateCard: Card) =>{
-  navigate(`/edit/${updateCard.id}`);
-}
+
+  const handleEditCard = (cardId: string) => {
+    navigate(`/edit/${cardId}`)
+  }
 
   return (
     <>
@@ -48,10 +40,10 @@ const handleEditCard =(updateCard: Card) =>{
         <TextInput placeholder="Back" value={back} onChange={setBack} />
         <Button title="Save" clickHandler={handleSaveButtonClick} />
 
-        {state.length === 0 ? (
+        {cards.length === 0 ? (
           <div className={styles.noData}>No Data</div>
         ) : (
-          state.map((card:any) => (
+          cards.map(card => (
             <TableRow
               key={card.id}
               item={card}
