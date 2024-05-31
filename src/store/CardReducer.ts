@@ -58,4 +58,6 @@ export function CardReducer(state: ApiState, action: Action): ApiState {
 
 export const initialApiState: ApiState = {
   cards: [],
+  game: {},
+  x:100
 }
