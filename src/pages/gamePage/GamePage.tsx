@@ -1,60 +1,67 @@
-import { useEffect, useReducer, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Button } from '../../components/Button'
 import { TextInput } from '../../components/TextInput'
 import styles from './GamePage.module.css'
-import { GameReducer } from '../../store/GameReducer'
-import { initialApiState } from '../../store/CardReducer'
+import { actionCreator } from '../../store/actions/ActionCreator'
+import { AppContext } from '../../store/Context'
+import { Game } from '../../models/Game'
+import { useNavigate } from 'react-router-dom'
 
 export const GamePage = () => {
-  let [back, setBack] = useState('')
+  const { cards, game, dispatch } = useContext(AppContext);
+  const navigate = useNavigate();
 
-  const handleEditClick = () => {
-    // Hier kannst du die Logik einfügen, die beim Klick auf den Button ausgeführt werden soll.
-    console.log('Edit button clicked!')
+  let [answer, setAnswer] = useState('');
+
+  const handleAnswerSubmission = () => {
+    actionCreator({ type: 'submit-answer', payload: answer });
+    checkGameStatus();
+    setAnswer('');
   }
 
-  const [state, dispatch] = useReducer(GameReducer, initialApiState)
-  useEffect(() => {
-    dispatch({ type: 'load-game', payload: ''})
-  }, [])
-
-  const createNewGame = () => {
-    fetch('http://localhost:8000/game/new', {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      }).then((resp: any) => {
-        console.log('new game created')
-        return resp.json();
-      }).then(game => {
-        dispatch({type: 'new-game', payload: game})
-      });
+  const checkGameStatus = () => {
+    if (game.answers.length >= 2) {
+      console.log('navigating result');
+      navigate('/result');
+    }
   }
+  const getParcent = (game: Game) => {
+    if (!game) return 0;
+    
+    const percent = game.cardIndex / game.gameCards.length * 100;
+    return Math.trunc(percent);
+  }
+
   return (
     <>
-      <div className={styles.gameState}>
-        <div className={styles.themedText}>Progress</div>
-        <Button title="Delete" clickHandler={() => null}></Button>
-      </div>
-
-    {JSON.stringify(state.x)}
-      {Object.keys(state.game.gameCards||[]).length == 0 ? (
-        <>
-        <h1>No Game Running</h1>
-        <Button title="Create New Game" clickHandler={() => createNewGame()}></Button>
-        </>
-      ) : (
-        <div className={styles.cardContainer}>
-          <div className={`${styles.card} ${styles.themedText}`}>Card</div>
-          <div className={styles.answerContainer}>
-            <TextInput
-              placeholder="Placeholder"
-              value={back}
-              onChange={setBack}
-            />
-            <Button title="Submit" clickHandler={handleEditClick} />
-          </div>
-        </div>
-      )}
+      {
+        game && game.gameCards.length === 0 ?
+          <>
+            <div className={styles.noGameWrapper}>
+              <Button title="Start New Game" clickHandler={() => {
+                actionCreator({ type: 'create-new-game'});
+              }}></Button>
+              <div className={styles.noGameMessage}>No game running</div>
+            </div>
+          </>
+          : <>
+            <div className={styles.gameState}>
+              <div className={styles.themedText}>Progress {getParcent(game)}%</div>
+              <Button title="Delete Game" clickHandler={() => actionCreator({ type: 'delete-game' })}></Button>
+            </div>
+            <div className={styles.cardContainer}>
+              <div className={`${styles.card} ${styles.themedText}`}>{(game.gameCards[game.cardIndex] || {}).front}</div>
+              <div className={styles.answerContainer}>
+                <TextInput
+                  placeholder="Answer"
+                  value={answer}
+                  onChange={setAnswer}
+                />
+                <Button title="Submit" clickHandler={handleAnswerSubmission} />
+              </div>
+            </div>
+          </>
+      }
     </>
   )
 }

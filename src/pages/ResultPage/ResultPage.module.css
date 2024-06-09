@@ -1,0 +1,47 @@
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+
+  max-width: 800px;
+  width: 80%;
+}
+
+.resultRow {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  padding-top: 8px;
+}
+
+.resultCell {
+  /* font-weight: 600; */
+  padding-top: 8px;
+  width: 20%;  
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+}
+
+.headerCell {
+  font-weight: 900;
+  width: 20%;
+}
+
+.noGameWrapper {
+  text-align: center;
+  padding: 20px;
+}
+
+.solvedMessage {
+  color: black;
+  font-size: 28px;
+  font-weight: 400;
+  margin: 16px;
+  text-align: center;
+}

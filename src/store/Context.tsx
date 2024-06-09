@@ -1,59 +1,55 @@
-import { Action } from '../models/Action'
-import { ApiState } from '../models/ApiState'
 import { createContext, ReactNode, useReducer, useEffect } from 'react'
-import { CardReducer, initialApiState } from './CardReducer'
+import { AppState } from '../models/AppState'
+import { AppReducer } from './AppReducer'
+import { AppAction } from './actions/AppAction'
 
-interface AppState extends ApiState {
-  dispatch: (action: Action) => void
+interface IAppState extends AppState {
+  dispatch: (action: AppAction) => void
 }
 
-const initialState: AppState = {
-  ...initialApiState,
-  dispatch: (action: Action) => {}
+const initialState: IAppState = {
+  cards: [],
+  game: { gameCards: [], cardIndex: 0, answers: [] },
+  dispatch: (action: AppAction) => { }
 }
 
-export const AppContext = createContext<AppState>(initialState)
+export const AppContext = createContext<IAppState>(initialState)
+export let AppStore: IAppState;
 
 interface Props {
   children: ReactNode
 }
 
 export const AppProvider = ({ children }: Props) => {
-  const [state, dispatch] = useReducer(CardReducer, initialState)
-  const url = "http://localhost:8000/cards"
-  // const [state, dispatch] = useFetch(CardReducer, initialState, url)
-  
+  const [state, dispatch] = useReducer(AppReducer, initialState)
+  const url = "http://localhost:8000/state"
+
   useEffect(() => {
     const abortController = new AbortController()
-
-    fetch(url, {  signal: abortController.signal })
-    .then(response => {
-        if(!response.ok) {
-            throw Error('failed to fetch data for that resource')
+    fetch(url, { signal: abortController.signal })
+      .then(response => {
+        if (!response.ok) {
+          throw Error('failed to fetch data for that resource')
         }
         return response.json()
-    })
-    .then(data => {
-        dispatch({type: 'set-cards', cards:data})
-    })
-    .catch(err => {
-        if(err.name === 'AbortError'){
-            console.log('fetch aborted')
-            // setError(err.message)
+      })
+      .then(data => {
+        dispatch({ type: 'set-cards', payload: data.cards });
+        dispatch({ type: 'load-game', payload: data.game });
+      })
+      .catch(err => {
+        if (err.name === 'AbortError') {
+          console.log('fetch aborted');
         }
-        // setLoading(false)
-        // setError(err.message);
-    })
+      });
 
     return () => abortController.abort()
-}, [url])
+  }, [url])
 
-  const store = {
+  AppStore = {
     ...state,
     dispatch
   }
 
-  console.log('render AppProvider', state.cards)
-
-  return <AppContext.Provider value={store}>{children}</AppContext.Provider>
+  return <AppContext.Provider value={AppStore}>{children}</AppContext.Provider>
 }

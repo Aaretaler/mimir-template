@@ -6,10 +6,13 @@ import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../../store/Context'
 import { v4 as createId } from 'uuid'
+import { Card } from '../../models/Card'
+import { actionCreator } from '../../store/actions/ActionCreator'
 
 export const CardManager = () => {
   const [back, setBack] = useState('')
   const [front, setFront] = useState('')
+
   const navigate = useNavigate()
   const { cards, dispatch } = useContext(AppContext)
 
@@ -18,20 +21,12 @@ export const CardManager = () => {
       alert('Please fill in all fields')
     } else {
       const newCard = { id: createId(), front, back }
-      dispatch({ type: 'add-card', card: newCard })
+      actionCreator({ type: 'add-card', payload: newCard });
       setBack('')
       setFront('')
     }
   }
 
-  // TODO: Move these functions to arrow functions 
-  const handleDeleteCard = (cardId: string) => {
-    dispatch({ type: 'delete-card', cardId })
-  }
-
-  const handleEditCard = (cardId: string) => {
-    navigate(`/edit/${cardId}`)
-  }
 
   return (
     <>
@@ -43,12 +38,12 @@ export const CardManager = () => {
         {cards.length === 0 ? (
           <div className={styles.noData}>No Data</div>
         ) : (
-          cards.map(card => (
+          cards.map((card: Card) => (
             <TableRow
               key={card.id}
               item={card}
-              handleDeleteButtonClick={handleDeleteCard}
-              handleEditButtonClick={handleEditCard}
+              handleDeleteButtonClick={(cardId: string) => { actionCreator({ type: 'delete-card', payload: card }) }}
+              handleEditButtonClick={(cardId: string) => { navigate(`/edit/${cardId}`) }}
             />
           ))
         )}
