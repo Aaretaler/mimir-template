@@ -8,37 +8,42 @@ export const actionCreator = (action: CardAction | GameAction) => {
     let method = 'GET';
     let body: string = '';
     let actionType = action.type;
-    
+
     switch (action.type) {
         case 'create-new-game':
-            url += '/game/new';
+            url += '/game';
+            method = 'POST';
             actionType = 'new-game';
             break;
         case 'submit-answer':
-            url += '/game/answer';
+            url += '/answer';
             method = 'POST';
             body = JSON.stringify({ answer: action.payload });
             break;
         case 'delete-game':
-            url += '/game/delete';
+            url += '/game';
             method = 'DELETE';
             body = JSON.stringify({});
-            break;            
-        // cards
+            break;
+      // cards
         case 'add-card':
-            url += '/card/add';
+            url += '/card';
             method = 'POST';
             body = JSON.stringify(action.payload);
             break;
         case 'update-card':
-            url += '/card/update';
+            url += '/card';
             method = 'PATCH';
             body = JSON.stringify(action.payload);
             break;
         case 'delete-card':
-            url += '/card/delete';
+            url += '/card';
             method = 'DELETE';
             body = JSON.stringify(action.payload);
+            break;
+        case 'get-all-cards':
+            url += '/cards';
+            method = 'GET';
             break;
         default:
             console.error('Unknown action: ' + action.type);
