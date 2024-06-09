@@ -4,6 +4,7 @@ import { Button } from '../../components/Button'
 import { useContext, useState } from 'react'
 import { AppContext } from '../../store/Context'
 import { useNavigate, useParams } from 'react-router-dom'
+import { actionCreator } from '../../store/actions/ActionCreator'
 
 export const CardEditor = () => {
   const navigate = useNavigate()
@@ -17,7 +18,7 @@ export const CardEditor = () => {
     if (card) {
       card.front = front
       card.back = back
-      dispatch({ type: 'update-card', card })
+      actionCreator({ type: 'update-card', payload: card })
       navigate('/cards')
     }
   }
