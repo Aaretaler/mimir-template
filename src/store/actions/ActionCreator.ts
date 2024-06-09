@@ -4,7 +4,7 @@ import { ServerAPI } from "../ServerAPI";
 import { AppStore } from "../Context";
 
 export const actionCreator = (action: CardAction | GameAction) => {
-    let url = 'http://localhost:8000';
+    let url = '/api';
     let method = 'GET';
     let body: string = '';
     let actionType = action.type;
