@@ -20,4 +20,8 @@ type UpdateCardAction = {
   payload: Card
 }
 
-export type CardAction = SetCardsAction | AddCardAction | DeleteCardAction | UpdateCardAction
+type GetAllCards = {
+  type: 'get-all-cards'
+}
+
+export type CardAction = SetCardsAction | AddCardAction | DeleteCardAction | UpdateCardAction | GetAllCards
