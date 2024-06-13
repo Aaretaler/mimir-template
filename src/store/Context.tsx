@@ -22,7 +22,7 @@ interface Props {
 
 export const AppProvider = ({ children }: Props) => {
   const [state, dispatch] = useReducer(AppReducer, initialState)
-  const url = "http://localhost:8000/state"
+  const url = "api/state"
 
   useEffect(() => {
     const abortController = new AbortController()

@@ -41,10 +41,6 @@ export const actionCreator = (action: CardAction | GameAction) => {
             method = 'DELETE';
             body = JSON.stringify(action.payload);
             break;
-        case 'get-all-cards':
-            url += '/cards';
-            method = 'GET';
-            break;
         default:
             console.error('Unknown action: ' + action.type);
     }
