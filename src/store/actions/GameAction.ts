@@ -1,16 +1,16 @@
-import { Game } from "../../models/Game"
+import { Game } from '../../models/Game'
 
 type CreateNewGame = {
   type: 'create-new-game'
 }
 
 type NewGameAction = {
-  type: 'new-game',
+  type: 'new-game'
   payload: Game
 }
 
 type LoadGameAction = {
-  type: 'load-game',
+  type: 'load-game'
   payload: Game
 }
 
@@ -23,5 +23,14 @@ type DeleteGamedAction = {
   type: 'delete-game'
 }
 
+type GetGameResultAction = {
+  type: 'get-result'
+}
 
-export type GameAction = NewGameAction | SubmitAnswerAction | DeleteGamedAction | LoadGameAction | CreateNewGame
+export type GameAction =
+  | NewGameAction
+  | SubmitAnswerAction
+  | DeleteGamedAction
+  | LoadGameAction
+  | CreateNewGame
+  | GetGameResultAction

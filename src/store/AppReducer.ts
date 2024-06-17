@@ -34,7 +34,6 @@ export function AppReducer(state: AppState, action: AppAction): AppState {
                 ...state,
                 game: { cardIndex: 0, gameCards: [], answers: [] }
             };
-            break;
         case 'submit-answer':
             return {
                 ...state,

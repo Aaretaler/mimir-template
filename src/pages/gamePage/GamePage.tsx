@@ -21,6 +21,7 @@ export const GamePage = () => {
 
   const checkGameStatus = () => {
     if (game.answers.length >= 2) {
+      actionCreator({ type: 'get-result' });
       console.log('navigating result');
       navigate('/result');
     }

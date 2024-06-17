@@ -25,6 +25,11 @@ export const actionCreator = (action: CardAction | GameAction) => {
             method = 'DELETE';
             body = JSON.stringify({});
             break;
+        case 'get-result':
+            url += '/result';
+            method = 'GET';
+            actionType = 'load-game';
+            break;
       // cards
         case 'add-card':
             url += '/card';
@@ -47,6 +52,7 @@ export const actionCreator = (action: CardAction | GameAction) => {
 
     if (method === 'GET') {
         ServerAPI.get(url, method).then((data: any) => {
+            console.log(data);
             AppStore.dispatch({ type: actionType, payload: data })
         });
     } else {
