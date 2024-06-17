@@ -8,7 +8,7 @@ import { useContext } from 'react'
 export const AppBar = () => {
   const navigate = useNavigate()
 
-  const { cards, game, dispatch } = useContext(AppContext);
+  const { game } = useContext(AppContext);
 
   const getButtonCaption = () => {
     if (!game) return 'New Game';

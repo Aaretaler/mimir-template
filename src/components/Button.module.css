@@ -8,3 +8,7 @@
     color: white;
     background-color: var(--secondary-color);
 }
+
+.button:hover {
+    background-color: var(--hover-color);
+}

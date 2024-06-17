@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
-import { CardManager } from './pages/CardManager/CardManager.tsx'
 import { Layout } from './layout.tsx'
-import { GamePage } from './pages/GamePage/GamePage.tsx'
 import { ResultPage } from './pages/ResultPage/ResultPage.tsx'
-import { CardEditor } from './pages/CardEditor/CardEditor.tsx'
+import { CardEditor } from './pages/cardEditor/cardEditor.tsx'
+import { CardManager } from './pages/cardManager/CardManager.tsx'
+import { GamePage } from './pages/gamePage/GamePage.tsx'
 
 
 function App() {

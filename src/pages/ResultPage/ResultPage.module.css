@@ -16,7 +16,6 @@
 }
 
 .resultCell {
-  /* font-weight: 600; */
   padding-top: 8px;
   width: 20%;  
 }
@@ -40,7 +39,7 @@
 
 .solvedMessage {
   color: black;
-  font-size: 28px;
+  font-size: 18px;
   font-weight: 400;
   margin: 16px;
   text-align: center;

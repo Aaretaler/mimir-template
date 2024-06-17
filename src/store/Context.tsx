@@ -10,11 +10,11 @@ interface IAppState extends AppState {
 const initialState: IAppState = {
   cards: [],
   game: { gameCards: [], cardIndex: 0, answers: [] },
-  dispatch: (action: AppAction) => { }
+  dispatch: (action: AppAction) => {},
 }
 
 export const AppContext = createContext<IAppState>(initialState)
-export let AppStore: IAppState;
+export let AppStore: IAppState
 
 interface Props {
   children: ReactNode
@@ -22,7 +22,7 @@ interface Props {
 
 export const AppProvider = ({ children }: Props) => {
   const [state, dispatch] = useReducer(AppReducer, initialState)
-  const url = "api/state"
+  const url = 'api/state'
 
   useEffect(() => {
     const abortController = new AbortController()
@@ -34,21 +34,21 @@ export const AppProvider = ({ children }: Props) => {
         return response.json()
       })
       .then(data => {
-        dispatch({ type: 'set-cards', payload: data.cards });
-        dispatch({ type: 'load-game', payload: data.game });
+        dispatch({ type: 'set-cards', payload: data.cards })
+        dispatch({ type: 'load-game', payload: data.game })
       })
       .catch(err => {
         if (err.name === 'AbortError') {
-          console.log('fetch aborted');
+          console.log('fetch aborted')
         }
-      });
+      })
 
     return () => abortController.abort()
   }, [url])
 
   AppStore = {
     ...state,
-    dispatch
+    dispatch,
   }
 
   return <AppContext.Provider value={AppStore}>{children}</AppContext.Provider>

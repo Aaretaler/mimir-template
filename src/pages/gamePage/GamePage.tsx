@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { Button } from '../../components/Button'
 import { TextInput } from '../../components/TextInput'
 import styles from './GamePage.module.css'
@@ -8,60 +8,71 @@ import { Game } from '../../models/Game'
 import { useNavigate } from 'react-router-dom'
 
 export const GamePage = () => {
-  const { cards, game, dispatch } = useContext(AppContext);
-  const navigate = useNavigate();
+  const { game } = useContext(AppContext)
+  const navigate = useNavigate()
 
-  let [answer, setAnswer] = useState('');
+  let [answer, setAnswer] = useState('')
 
   const handleAnswerSubmission = () => {
-    actionCreator({ type: 'submit-answer', payload: answer });
-    checkGameStatus();
-    setAnswer('');
+    actionCreator({ type: 'submit-answer', payload: answer })
+    checkGameStatus()
+    setAnswer('')
   }
 
   const checkGameStatus = () => {
     if (game.answers.length >= 2) {
-      console.log('navigating result');
-      navigate('/result');
+      actionCreator({ type: 'get-result' })
+      console.log('navigating result')
+      navigate('/result')
     }
   }
-  const getParcent = (game: Game) => {
-    if (!game) return 0;
-    
-    const percent = game.cardIndex / game.gameCards.length * 100;
-    return Math.trunc(percent);
+  const getPercent = (game: Game) => {
+    if (!game) return 0
+
+    const percent = (game.cardIndex / game.gameCards.length) * 100
+    return Math.trunc(percent)
   }
 
   return (
     <>
-      {
-        game && game.gameCards.length === 0 ?
-          <>
-            <div className={styles.noGameWrapper}>
-              <Button title="Start New Game" clickHandler={() => {
-                actionCreator({ type: 'create-new-game'});
-              }}></Button>
-              <div className={styles.noGameMessage}>No game running</div>
+      {game && game.gameCards.length === 0 ? (
+        <>
+          <div className={styles.noGameWrapper}>
+            <Button
+              title="Start New Game"
+              clickHandler={() => {
+                actionCreator({ type: 'create-new-game' })
+              }}
+            ></Button>
+            <div className={styles.noGameMessage}>No game running.</div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className={styles.gameState}>
+            <div className={styles.themedText}>
+              Progress {getPercent(game)}%
             </div>
-          </>
-          : <>
-            <div className={styles.gameState}>
-              <div className={styles.themedText}>Progress {getParcent(game)}%</div>
-              <Button title="Delete Game" clickHandler={() => actionCreator({ type: 'delete-game' })}></Button>
+            <Button
+              title="Delete Game"
+              clickHandler={() => actionCreator({ type: 'delete-game' })}
+            ></Button>
+          </div>
+          <div className={styles.cardContainer}>
+            <div className={`${styles.card} ${styles.themedText}`}>
+              {(game.gameCards[game.cardIndex] || {}).front}
             </div>
-            <div className={styles.cardContainer}>
-              <div className={`${styles.card} ${styles.themedText}`}>{(game.gameCards[game.cardIndex] || {}).front}</div>
-              <div className={styles.answerContainer}>
-                <TextInput
-                  placeholder="Answer"
-                  value={answer}
-                  onChange={setAnswer}
-                />
-                <Button title="Submit" clickHandler={handleAnswerSubmission} />
-              </div>
+            <div className={styles.answerContainer}>
+              <TextInput
+                placeholder="Answer"
+                value={answer}
+                onChange={setAnswer}
+              />
+              <Button title="Submit" clickHandler={handleAnswerSubmission} />
             </div>
-          </>
-      }
+          </div>
+        </>
+      )}
     </>
   )
 }

@@ -1,3 +1,9 @@
+# @Tobias
+
+The following assumptions have been made:
+
+- Filter & Sort mechanisms from Web 1 have been removed to match the requirements shown in the example video.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
