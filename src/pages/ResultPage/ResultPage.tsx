@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { Button } from '../../components/Button'
 import styles from './ResultPage.module.css'
 import { actionCreator } from '../../store/actions/ActionCreator'
@@ -8,25 +8,27 @@ import { useNavigate } from 'react-router-dom'
 import { Card } from '../../models/Card'
 
 export const ResultPage = () => {
-  const { cards, game, dispatch } = useContext(AppContext);
-  const navigate = useNavigate();
+  const { game } = useContext(AppContext)
+  const navigate = useNavigate()
 
   const getCorrectAnswerCount = (game: Game) => {
-    if (!game.answers) return;
+    if (!game.answers) return
 
-    let correctAnswerCount = 0;
+    let correctAnswerCount = 0
     for (let i = 0; i < game.answers.length; i++) {
-      if (game.gameCards[i].back === game.answers[i]) {
-        correctAnswerCount++;
+      if (
+        game.gameCards[i].back.toLowerCase() === game.answers[i].toLowerCase()
+      ) {
+        correctAnswerCount++
       }
     }
-    return correctAnswerCount;
+    return correctAnswerCount
   }
 
   const startNewGame = () => {
-    actionCreator({ type: 'delete-game' });
-    navigate('/');
-    actionCreator({ type: 'create-new-game' });
+    actionCreator({ type: 'delete-game' })
+    navigate('/')
+    actionCreator({ type: 'create-new-game' })
   }
 
   return (
@@ -34,9 +36,15 @@ export const ResultPage = () => {
       {
         <>
           <div className={styles.noGameWrapper}>
-            <Button title="Start New Game" clickHandler={() => startNewGame()}></Button>
+            <Button
+              title="Start New Game"
+              clickHandler={() => startNewGame()}
+            ></Button>
           </div>
-          <div className={styles.solvedMessage}>Solved {getCorrectAnswerCount(game)} out of {game.gameCards.length}</div>
+          <div className={styles.solvedMessage}>
+            Solved {getCorrectAnswerCount(game)} out of {game.gameCards.length}{' '}
+            correctly.
+          </div>
           <div className={styles.cardContainer}>
             <div className={styles.headerRow}>
               <div className={styles.headerCell}>Front</div>
@@ -49,7 +57,14 @@ export const ResultPage = () => {
                 <div className={styles.resultCell}>{card.front}</div>
                 <div className={styles.resultCell}>{card.back}</div>
                 <div className={styles.resultCell}>{game.answers[index]}</div>
-                <div className={styles.resultCell}>{game.answers[index] == card.back ? <>&#x2713;</> : 'X'}</div>
+                <div className={styles.resultCell}>
+                  {game.answers[index]?.toLowerCase() ==
+                  card.back.toLowerCase() ? (
+                    <>&#x2713;</>
+                  ) : (
+                    <>&#x2717;</>
+                  )}
+                </div>
               </div>
             ))}
           </div>

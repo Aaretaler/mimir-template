@@ -14,7 +14,7 @@ export const CardManager = () => {
   const [front, setFront] = useState('')
 
   const navigate = useNavigate()
-  const { cards, dispatch } = useContext(AppContext)
+  const { cards } = useContext(AppContext)
 
   const handleSaveButtonClick = () => {
     if (front === '' || back === '') {
@@ -42,7 +42,7 @@ export const CardManager = () => {
             <TableRow
               key={card.id}
               item={card}
-              handleDeleteButtonClick={(cardId: string) => { actionCreator({ type: 'delete-card', payload: card }) }}
+              handleDeleteButtonClick={() => { actionCreator({ type: 'delete-card', payload: card }) }}
               handleEditButtonClick={(cardId: string) => { navigate(`/edit/${cardId}`) }}
             />
           ))

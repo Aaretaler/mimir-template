@@ -8,7 +8,7 @@ import { actionCreator } from '../../store/actions/ActionCreator'
 
 export const CardEditor = () => {
   const navigate = useNavigate()
-  const { cards, dispatch } = useContext(AppContext)
+  const { cards } = useContext(AppContext)
   const { id } = useParams<{ id: string }>()
   const card = cards.find(card => card.id === id)
   let [back, setBack] = useState(card ? card.back : '')

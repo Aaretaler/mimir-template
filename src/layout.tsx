@@ -1,6 +1,6 @@
 import styles from './App.module.css'
-import { AppBar } from './pages/DockedViews/AppBar'
 import { Outlet } from 'react-router-dom'
+import { AppBar } from './pages/dockedViews/AppBar'
 
 export function Layout() {
   return (
