@@ -20,7 +20,7 @@ export const GamePage = () => {
   }
 
   const checkGameStatus = () => {
-    if (game.answers.length >= 2) {
+    if (game.answers.length >= game.gameCards.length-1) {
       actionCreator({ type: 'get-result' })
       console.log('navigating result')
       navigate('/result')
