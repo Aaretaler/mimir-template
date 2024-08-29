@@ -5,10 +5,8 @@ interface Props {
   clickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-export const Button = (props: Props) => {
-  return (
+export const Button = (props: Props) => (
     <button className={styles.button} type="button" onClick={props.clickHandler}>
       {props.title}
     </button>
   )
-}
