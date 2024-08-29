@@ -21,11 +21,8 @@ export class ServerAPI {
       method: method,
       headers: { 'Content-Type': 'application/json' },
     })
-      .then((resp: any) => {
+      .then((resp) => {
         return resp.json()
-      })
-      .then(data => {
-        return data
       })
       .catch(e => {
         alert('Server Error:' + e)
