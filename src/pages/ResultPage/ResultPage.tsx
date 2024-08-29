@@ -33,43 +33,38 @@ export const ResultPage = () => {
 
   return (
     <>
-      {
-        <>
-          <div className={styles.noGameWrapper}>
-            <Button
-              title="Start New Game"
-              clickHandler={() => startNewGame()}
-            ></Button>
-          </div>
-          <div className={styles.solvedMessage}>
-            Solved {getCorrectAnswerCount(game)} out of {game.gameCards.length}{' '}
-            correctly.
-          </div>
-          <div className={styles.cardContainer}>
-            <div className={styles.headerRow}>
-              <div className={styles.headerCell}>Front</div>
-              <div className={styles.headerCell}>Back</div>
-              <div className={styles.headerCell}>Your Answer</div>
-              <div className={styles.headerCell}>Accepted</div>
+      <div className={styles.noGameWrapper}>
+        <Button
+          title="Start New Game"
+          clickHandler={() => startNewGame()}
+        ></Button>
+      </div>
+      <div className={styles.solvedMessage}>
+        Solved {getCorrectAnswerCount(game)} out of {game.gameCards.length}{' '}
+        correctly.
+      </div>
+      <div className={styles.cardContainer}>
+        <div className={styles.headerRow}>
+          <div className={styles.headerCell}>Front</div>
+          <div className={styles.headerCell}>Back</div>
+          <div className={styles.headerCell}>Your Answer</div>
+          <div className={styles.headerCell}>Accepted</div>
+        </div>
+        {game.gameCards.map((card: Card, index: number) => (
+          <div key={card.front} className={styles.resultRow}>
+            <div className={styles.resultCell}>{card.front}</div>
+            <div className={styles.resultCell}>{card.back}</div>
+            <div className={styles.resultCell}>{game.answers[index]}</div>
+            <div className={styles.resultCell}>
+              {game.answers[index]?.toLowerCase() == card.back.toLowerCase() ? (
+                <>&#x2713;</>
+              ) : (
+                <>&#x2717;</>
+              )}
             </div>
-            {game.gameCards.map((card: Card, index: number) => (
-              <div key={card.front} className={styles.resultRow}>
-                <div className={styles.resultCell}>{card.front}</div>
-                <div className={styles.resultCell}>{card.back}</div>
-                <div className={styles.resultCell}>{game.answers[index]}</div>
-                <div className={styles.resultCell}>
-                  {game.answers[index]?.toLowerCase() ==
-                  card.back.toLowerCase() ? (
-                    <>&#x2713;</>
-                  ) : (
-                    <>&#x2717;</>
-                  )}
-                </div>
-              </div>
-            ))}
           </div>
-        </>
-      }
+        ))}
+      </div>
     </>
   )
 }
