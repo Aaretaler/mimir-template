@@ -39,7 +39,7 @@ export const actionCreator = (action: CardAction | GameAction) => {
       break
     case 'update-card':
       url += '/card'
-      method = 'PATCH'
+      method = 'PUT'
       body = JSON.stringify(action.payload)
       break
     case 'delete-card':
