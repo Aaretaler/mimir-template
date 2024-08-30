@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useReducer, useEffect } from 'react'
+import { createContext, ReactNode, useReducer } from 'react'
 import { AppState } from '../models/AppState'
 import { AppReducer } from './AppReducer'
 import { AppAction } from './actions/AppAction'
@@ -18,33 +18,14 @@ export let AppStore: IAppState
 
 interface Props {
   children: ReactNode
+  initialData: AppState 
 }
 
-export const AppProvider = ({ children }: Props) => {
-  const [state, dispatch] = useReducer(AppReducer, initialState)
-  const url = 'api/state'
-
-  useEffect(() => {
-    const abortController = new AbortController()
-    fetch(url, { signal: abortController.signal })
-      .then(response => {
-        if (!response.ok) {
-          throw Error('failed to fetch data for that resource')
-        }
-        return response.json()
-      })
-      .then(data => {
-        dispatch({ type: 'set-cards', payload: data.cards })
-        dispatch({ type: 'load-game', payload: data.game })
-      })
-      .catch(err => {
-        if (err.name === 'AbortError') {
-          console.log('fetch aborted')
-        }
-      })
-
-    return () => abortController.abort()
-  }, [url])
+export const AppProvider = ({ children, initialData }: Props) => {
+  const [state, dispatch] = useReducer(AppReducer, {
+    ...initialState,
+    ...initialData, 
+  })
 
   AppStore = {
     ...state,
@@ -53,3 +34,6 @@ export const AppProvider = ({ children }: Props) => {
 
   return <AppContext.Provider value={AppStore}>{children}</AppContext.Provider>
 }
+
+
+
