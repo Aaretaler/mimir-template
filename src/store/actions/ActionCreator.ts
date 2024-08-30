@@ -1,6 +1,7 @@
 import { CardAction } from './CardAction'
 import { GameAction } from './GameAction'
-import { ServerAPI } from '../ServerAPI'
+//import { ServerAPI } from '../ServerAPI'
+import { get, post } from '../ServerAPI';
 import { AppStore } from '../Context'
 
 export const actionCreator = (action: CardAction | GameAction) => {
@@ -50,15 +51,14 @@ export const actionCreator = (action: CardAction | GameAction) => {
     default:
       console.error('Unknown action: ' + action.type)
   }
-
   if (method === 'GET') {
-    ServerAPI.get(url, method).then((data: any) => {
-      console.log(data)
-      AppStore.dispatch({ type: actionType, payload: data })
-    })
+    get(url, method).then((data: any) => {
+      console.log(data);
+      AppStore.dispatch({ type: actionType, payload: data });
+    });
   } else {
-    ServerAPI.post(url, method, body).then((data: any) => {
-      AppStore.dispatch({ type: actionType, payload: data })
-    })
+      post(url, method, body).then((data: any) => {
+      AppStore.dispatch({ type: actionType, payload: data });
+    });
   }
 }

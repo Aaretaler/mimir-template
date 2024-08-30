@@ -1,34 +1,41 @@
-export class ServerAPI {
-  static post(url: string, method: string, body: string): any {
-    return fetch(url, {
-      method: method,
-      headers: { 'Content-Type': 'application/json' },
-      body: body,
+export function post(url: string, method: string, body: string): Promise<any> {
+  return fetch(url, {
+    method: method,
+    headers: { 'Content-Type': 'application/json' },
+    body: body,
+  })
+    .then((resp) => {
+      if (!resp.ok) {
+        throw new Error(`HTTP-Fehler! Status: ${resp.status}`);
+      }
+      return resp.json();
     })
-      .then((resp: any) => {
-        return resp.json()
-      })
-      .then(data => {
-        return data
-      })
-      .catch(e => {
-        alert('Server Error:' + e)
-      })
-  }
-
-  static get(url: string, method: string): any {
-    return fetch(url, {
-      method: method,
-      headers: { 'Content-Type': 'application/json' },
+    .then(data => {
+      return data;
     })
-      .then((resp: any) => {
-        return resp.json()
-      })
-      .then(data => {
-        return data
-      })
-      .catch(e => {
-        alert('Server Error:' + e)
-      })
-  }
+    .catch(e => {
+      console.error('Serverfehler:', e);
+      alert('Serverfehler: ' + e.message);
+    });
 }
+
+export function get(url: string, method: string): Promise<any> {
+  return fetch(url, {
+    method: method,
+    headers: { 'Content-Type': 'application/json' },
+  })
+    .then((resp) => {
+      if (!resp.ok) {
+        throw new Error(`HTTP-Fehler! Status: ${resp.status}`);
+      }
+      return resp.json();
+    })
+    .then(data => {
+      return data;
+    })
+    .catch(e => {
+      console.error('Serverfehler:', e);
+      alert('Serverfehler: ' + e.message);
+    });
+}
+
