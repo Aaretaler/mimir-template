@@ -8,6 +8,7 @@ interface IAppState extends AppState {
 }
 
 const initialState: IAppState = {
+  user: null,
   cards: [],
   game: { gameCards: [], cardIndex: 0, answers: [] },
   dispatch: (action: AppAction) => {},
