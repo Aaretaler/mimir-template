@@ -1,9 +1,8 @@
-import { CardAction } from './CardAction'
-import { GameAction } from './GameAction'
 import { ServerAPI } from '../ServerAPI'
 import { AppStore } from '../Context'
+import { AppAction } from './AppAction'
 
-export const actionCreator = (action: CardAction | GameAction) => {
+export const actionCreator = (action: AppAction) => {
   let url = '/api'
   let method = 'GET'
   let body: string = ''
@@ -45,6 +44,13 @@ export const actionCreator = (action: CardAction | GameAction) => {
     case 'delete-card':
       url += '/card'
       method = 'DELETE'
+      body = JSON.stringify(action.payload)
+      break
+    // user management
+    case 'send-login':
+      url += '/login'
+      method = 'POST'
+      actionType = 'receive-login'
       body = JSON.stringify(action.payload)
       break
     default:
