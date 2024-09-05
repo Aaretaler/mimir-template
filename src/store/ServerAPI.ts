@@ -6,9 +6,15 @@ export class ServerAPI {
       body: body,
     })
       .then((resp) => {
-        return resp.json()
+        //TODO refactor
+        const response = resp.json()
+        console.log(resp.ok)
+        console.log(response)
+
+        if(resp.ok) return response
       })
       .catch(e => {
+        console.log('Server Error:' + e)
         alert('Server Error:' + e)
       })
   }
