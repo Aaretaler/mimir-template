@@ -15,12 +15,12 @@ export const CardEditor = () => {
   let [front, setFront] = useState(card ? card.front : '')
 
   const handleEditClick = () => {
-    if (card) {
-      card.front = front
-      card.back = back
-      actionCreator({ type: 'update-card', payload: card })
-      navigate('/cards')
-    }
+    if (!card) return
+
+    card.front = front
+    card.back = back
+    actionCreator({ type: 'update-card', payload: card })
+    navigate('/cards')
   }
 
   return (
