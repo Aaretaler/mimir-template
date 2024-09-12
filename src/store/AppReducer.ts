@@ -3,10 +3,22 @@ import { AppState } from '../models/AppState'
 
 export function AppReducer(state: AppState, action: AppAction): AppState {
   switch (action.type) {
+    // User actions
+    case 'receive-login':
+      return {
+        ...state,
+        user: action.payload,
+      }
+    case 'logout':
+      return {
+        ...state,
+        user: null,
+      }
+    // Card actions
     case 'set-cards':
       return {
+        ...state,
         cards: action.payload,
-        game: state.game,
       }
     case 'add-card':
       return {
