@@ -1,11 +1,51 @@
 .appBar {
-    padding: 20px;
-    background: var(--primary-color);
-    color: #fff;
-    font-size: var(--font-size-title);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: baseline;
+  padding: 20px;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: var(--font-size-title);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flexChildLeft {
+  width: 33%;
+  text-align: left;
+}
+
+.flexChildCenter {
+  width: 33%;
+  text-align: center;
+}
+
+.flexChildRight {
+  width: 33%;
+  text-align: right;
+}
+.burgerMenuButton {
+  display: none;
+}
+
+.burgerMenu {
+  /* display: none; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--primary-color);
+  width: 100%;
+  height: calc(100vh - 80px);
+  margin-top: 70px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+@media (max-width: 600px) {
+  .flexChildCenter,
+  .flexChildRight {
+    display: none;
   }
-  
+  .burgerMenuButton {
+    display: block;
+  }
+}

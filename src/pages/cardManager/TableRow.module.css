@@ -1,38 +1,29 @@
-.itemText{
-   display: flex;
-   align-items: center; 
+.itemText {
+  display: flex;
+  align-items: center;
 }
 
-.buttonContainer{
-   display: flex;
-   justify-content: space-between;
-   gap: 10px;
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
 }
-
-.gridblock {
+.gridblockOuter {
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+}
+.gridblockText {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+}
+.gridblockButton {
    display: grid;
-   grid-template-columns: 4fr 4fr 1fr;
-   grid-template-rows: 1fr 1fr;
-   width: 850px;
-   height: 50px;
-}
-.itemText1{
-   grid-column: 1/2;
-   grid-row: 1/3
-   ; 
-}
-.itemText2{
-   grid-column: 2/3;
-   grid-row: 1/3; 
-}
-
-.itemButton1{
-   grid-column: 3/4;
-   grid-row: 1/2; 
-   width: 100%;
-}
-.itemButton1{
-   grid-column: 3/4;
-   grid-row: 2/3; 
-   
+   grid-template-columns: auto auto;
+   align-items: center;
+ }
+@media (max-width: 600px) {
+   .gridblockButton, .gridblockText {
+      grid-template-columns: auto;
+    }
 }

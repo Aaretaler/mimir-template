@@ -1,17 +1,23 @@
 .cardManager {
-    margin: 20px;
-    /*display: grid;
-    row-gap: 20px;
-    column-gap: 40px;
-    grid-template-columns: 1fr 1fr auto;*/
+  margin-top: 10px;
+  row-gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 980px;
+  width: 95%;
+  align-self: center;
+}
+.gridHeader {
+  row-gap: 10px;
+  display: grid;
+  grid-template-columns: 2.5fr 2.5fr 1fr;
+}
+@media (max-width: 600px) {
+  .gridHeader {
     display: grid;
-    grid-template-columns: auto;
-    max-width: 980px;
-    width: 100%;
-    align-self: center;
+    grid-template-columns: 1fr;
   }
-
-  .noData{
-    color: var(--secondary-color);
-    grid-column-start: 2;
-  }
+}
+.noData {
+  color: var(--secondary-color);
+}
