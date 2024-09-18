@@ -6,8 +6,6 @@ import { AppContext } from '../../store/Context'
 import { useNavigate, useParams } from 'react-router-dom'
 import { actionCreator } from '../../store/actions/ActionCreator'
 
-//TODO: style nicely and make responsive
-
 export const LoginPage = () => {
   const navigate = useNavigate()
   const { user } = useContext(AppContext)

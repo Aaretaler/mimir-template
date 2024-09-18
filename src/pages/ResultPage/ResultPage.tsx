@@ -48,14 +48,14 @@ export const ResultPage = () => {
           <div className={styles.headerCell}>Front</div>
           <div className={styles.headerCell}>Back</div>
           <div className={styles.headerCell}>Your Answer</div>
-          <div className={styles.headerCell}>Accepted</div>
+          <div className={styles.headerCell + " " + styles.hidden}>Accepted</div>
         </div>
         {game.gameCards.map((card: Card, index: number) => (
           <div key={card.front} className={styles.resultRow}>
             <div className={styles.resultCell}>{card.front}</div>
             <div className={styles.resultCell}>{card.back}</div>
-            <div className={styles.resultCell}>{game.answers[index]}</div>
-            <div className={styles.resultCell}>
+            <div className={styles.resultCell + " " + (game.answers[index]?.toLowerCase() == card.back.toLowerCase() ? styles.right : styles.wrong)}>{game.answers[index]}</div>
+            <div className={styles.resultCell  + " " + styles.hidden}>
               {game.answers[index]?.toLowerCase() == card.back.toLowerCase() ? (
                 <>&#x2713;</>
               ) : (

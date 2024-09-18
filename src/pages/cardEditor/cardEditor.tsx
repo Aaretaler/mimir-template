@@ -25,16 +25,25 @@ export const CardEditor = () => {
 
   return (
     <div className={styles.cardEditor}>
-      <div className={styles.TableHeader}>Front</div>
-      <div className={styles.TableHeader}>Back</div>
-      <div />
-      {card && (
-        <TextInput placeholder={card.front} value={front} onChange={setFront} />
-      )}
-      {card && (
-        <TextInput placeholder={card.back} value={back} onChange={setBack} />
-      )}
-      {card && <Button title="Edit" clickHandler={handleEditClick} />}
+      <div className={styles.HeaderFront}>Front</div>
+      <div className={styles.HeaderBack}>Back</div>
+      <div className={styles.TextInputFront}>
+        {card && (
+          <TextInput
+            placeholder={card.front}
+            value={front}
+            onChange={setFront}
+          />
+        )}
+      </div>
+      <div className={styles.TextInputBack}>
+        {card && (
+          <TextInput placeholder={card.back} value={back} onChange={setBack} />
+        )}
+      </div>
+      <div className={styles.ButtonUpdate}>
+        {card && <Button title="Update" clickHandler={handleEditClick} />}
+      </div>
       {!card && <div className={styles.TableHeader}>Invalid Card Number</div>}
     </div>
   )
