@@ -15,21 +15,25 @@ export const TableRow = ({
   handleEditButtonClick,
 }: Props) => (
   <Fragment key={item.id}>
-    <div className={styles.itemText}>{item.front}</div>
-    <div className={styles.itemText}>{item.back}</div>
-    <div className={styles.buttonContainer}>
-      <Button
-        title="Edit"
-        clickHandler={() => {
-          handleEditButtonClick(item.id)
-        }}
-      />
-      <Button
-        title="Delete"
-        clickHandler={() => {
-          handleDeleteButtonClick(item.id)
-        }}
-      />
+    <div className={styles.gridblockOuter}>
+      <div className={styles.gridblockText}>
+        <div className={styles.itemText1}>{item.front}</div>
+        <div className={styles.itemText2}>{item.back}</div>
+      </div>
+      <div className={styles.gridblockButton}>
+        <Button
+          title="Edit"
+          clickHandler={() => {
+            handleEditButtonClick(item.id)
+          }}
+        />
+        <Button
+          title="Delete"
+          clickHandler={() => {
+            handleDeleteButtonClick(item.id)
+          }}
+        />
+      </div>
     </div>
   </Fragment>
 )
