@@ -9,6 +9,7 @@
 }
 .gridHeader {
   row-gap: 10px;
+  column-gap: 10px;
   display: grid;
   grid-template-columns: 2.5fr 2.5fr 1fr;
 }

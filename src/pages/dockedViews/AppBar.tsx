@@ -3,13 +3,27 @@ import { MenuItem } from '../../components/MenuItem'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '../../components/Button'
 import { AppContext, AppStore } from '../../store/Context'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 export const AppBar = () => {
   const navigate = useNavigate()
   const [isMenuShown, setMenuVisibility] = useState(false)
 
   const { game } = useContext(AppContext)
+
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth > 600) {
+        setMenuVisibility(false)
+      }
+    }
+
+    addEventListener('resize', onResize)
+
+    return () => {
+      removeEventListener('resize', onResize)
+    }
+  }, [])
 
   const getButtonCaption = () => {
     if (!game) return 'New Game'
@@ -35,13 +49,15 @@ export const AppBar = () => {
             }}
           />
         </div>
-        {/* <Button
-          title="Login"
-          clickHandler={() => {
-            navigate('/login');
-          }}
-        /> */}
         <div className={styles.flexChildRight}>
+          {
+            <Button
+              title="Login"
+              clickHandler={() => {
+                navigate('/login')
+              }}
+            />
+          }
           <MenuItem />
           <Button
             title="Logout"
@@ -58,8 +74,32 @@ export const AppBar = () => {
         </div>
         {isMenuShown ? (
           <div className={styles.burgerMenu}>
-            <div> New Game</div>
-            <div> Manage Cards</div>
+            <div className={styles.buttonsInBurgerMenue}>
+              {
+                <Button
+                  title="Login"
+                  clickHandler={() => {
+                    setMenuVisibility(!isMenuShown)
+                    navigate('/login')
+                  }}
+                />
+              }
+              <Button
+                title="Logout"
+                clickHandler={() => {
+                  setMenuVisibility(!isMenuShown)
+                  AppStore.dispatch({ type: 'logout' })
+                  navigate('/login')
+                }}
+              />
+              <Button
+                title={getButtonCaption()}
+                clickHandler={() => {
+                  setMenuVisibility(!isMenuShown)
+                  navigate(game.answers.length >= 3 ? '/result' : '/')
+                }}
+              />
+            </div>
           </div>
         ) : (
           <div></div>
