@@ -10,19 +10,31 @@
 }
 
 .flexChildLeft {
-  width: 33%;
+  width: 40%;
   text-align: left;
 }
 
 .flexChildCenter {
-  width: 33%;
+  width: 30%;
   text-align: center;
 }
 
 .flexChildRight {
-  width: 33%;
+  width: 40%;
   text-align: right;
 }
+
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  margin-left: 10px; 
+  font-size: var(--font-size-content);
+  color: var(--secondary-color);
+}
+
 .burgerMenuButton {
   display: none;
 }
@@ -40,10 +52,9 @@
   flex-direction: column;
 }
 
-.buttonsInBurgerMenue
-{
+.buttonsInBurgerMenue {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   margin: 15px;
 }
 
@@ -52,8 +63,12 @@
   .flexChildRight {
     display: none;
   }
+  .username {
+    display: none;
+  }
   .burgerMenuButton {
     display: block;
     margin-left: auto;
   }
 }
+

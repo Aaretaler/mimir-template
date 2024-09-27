@@ -35,11 +35,15 @@ export const AppBar = () => {
   }
   return (
     <>
-      <div className={styles.appBar}>
-        <div className={styles.flexChildLeft}>
-          <div className={styles.title}>Mimir</div>
-          <div className={styles.title}>{user ? user.username : 'Guest'}</div>
+    <div className={styles.appBar}>
+      <div className={styles.flexChildLeft}>
+        <div className={styles.title}>
+          Mimir
+          <span className={styles.username}>
+            {user ? user.username : 'Guest'}
+          </span>
         </div>
+      </div>
         <div className={styles.flexChildCenter}>
           <Button
             title={getButtonCaption()}
