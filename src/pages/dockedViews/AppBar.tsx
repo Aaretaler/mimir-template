@@ -9,7 +9,7 @@ export const AppBar = () => {
   const navigate = useNavigate()
   const [isMenuShown, setMenuVisibility] = useState(false)
 
-  const { game } = useContext(AppContext)
+  const { game , user} = useContext(AppContext)
 
   useEffect(() => {
     const onResize = () => {
@@ -33,14 +33,17 @@ export const AppBar = () => {
       ? 'New Game'
       : 'Solve #' + (game.cardIndex + 1)
   }
-
-  //TODO remove login button when no longer needed
   return (
     <>
-      <div className={styles.appBar}>
-        <div className={styles.flexChildLeft}>
-          <div className={styles.title}>Mimir</div>
+    <div className={styles.appBar}>
+      <div className={styles.flexChildLeft}>
+        <div className={styles.title}>
+          Mimir
+          <span className={styles.username}>
+            {user ? user.username : 'Guest'}
+          </span>
         </div>
+      </div>
         <div className={styles.flexChildCenter}>
           <Button
             title={getButtonCaption()}
@@ -50,14 +53,6 @@ export const AppBar = () => {
           />
         </div>
         <div className={styles.flexChildRight}>
-          {
-            <Button
-              title="Login"
-              clickHandler={() => {
-                navigate('/login')
-              }}
-            />
-          }
           <MenuItem />
           <Button
             title="Logout"

@@ -1,4 +1,5 @@
 .menuItem{
+    margin-right: 10px;
     color:var(--background-color);
     font-size: var(--font-size-content);
     text-decoration: none;
