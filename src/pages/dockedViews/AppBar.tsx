@@ -9,7 +9,7 @@ export const AppBar = () => {
   const navigate = useNavigate()
   const [isMenuShown, setMenuVisibility] = useState(false)
 
-  const { game , user} = useContext(AppContext)
+  const { game, user } = useContext(AppContext)
 
   useEffect(() => {
     const onResize = () => {
@@ -35,15 +35,15 @@ export const AppBar = () => {
   }
   return (
     <>
-    <div className={styles.appBar}>
-      <div className={styles.flexChildLeft}>
-        <div className={styles.title}>
-          Mimir
-          <span className={styles.username}>
-            {user ? user.username : 'Guest'}
-          </span>
+      <div className={styles.appBar}>
+        <div className={styles.flexChildLeft}>
+          <div className={styles.title}>
+            Mimir
+            <span className={styles.username}>
+              {user ? user.username : 'Guest'}
+            </span>
+          </div>
         </div>
-      </div>
         <div className={styles.flexChildCenter}>
           <Button
             title={getButtonCaption()}
@@ -53,7 +53,7 @@ export const AppBar = () => {
           />
         </div>
         <div className={styles.flexChildRight}>
-          <MenuItem />
+          {user?.roles.includes('admin') && <MenuItem />}
           <Button
             title="Logout"
             clickHandler={() => {
@@ -70,28 +70,28 @@ export const AppBar = () => {
         {isMenuShown ? (
           <div className={styles.burgerMenu}>
             <div className={styles.buttonsInBurgerMenue}>
-              {
+              <Button
+                title={getButtonCaption()}
+                clickHandler={() => {
+                  setMenuVisibility(!isMenuShown)
+                  navigate(game.answers.length >= 3 ? '/result' : '/')
+                }}
+              />
+              {user?.roles.includes('admin') && (
                 <Button
-                  title="Login"
+                  title="Manage Cards"
                   clickHandler={() => {
                     setMenuVisibility(!isMenuShown)
-                    navigate('/login')
+                    navigate('/cards')
                   }}
                 />
-              }
+              )}
               <Button
                 title="Logout"
                 clickHandler={() => {
                   setMenuVisibility(!isMenuShown)
                   AppStore.dispatch({ type: 'logout' })
                   navigate('/login')
-                }}
-              />
-              <Button
-                title={getButtonCaption()}
-                clickHandler={() => {
-                  setMenuVisibility(!isMenuShown)
-                  navigate(game.answers.length >= 3 ? '/result' : '/')
                 }}
               />
             </div>

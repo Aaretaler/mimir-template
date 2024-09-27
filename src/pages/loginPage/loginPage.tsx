@@ -14,7 +14,7 @@ export const LoginPage = () => {
   let [attemptFailed, setAttemptFailed] = useState(false)
 
   const login = async () => {
-    await actionCreator({ type: 'send-login', payload: { username: username, password: password } })
+    const result = await actionCreator({ type: 'send-login', payload: { username: username, password: password } })
   }
 
   useEffect(() => {
