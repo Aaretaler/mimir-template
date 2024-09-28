@@ -1,18 +1,40 @@
 import { AppAction } from './actions/AppAction'
 import { AppState } from '../models/AppState'
+import { getUserFromLocalStorage, saveUserToLocalStorage } from '../models/User'
+import { initialState } from './Context'
 
 export function AppReducer(state: AppState, action: AppAction): AppState {
   switch (action.type) {
+    case 'set-loading':
+      return {
+        ...state,
+        isLoading: action.payload
+      }
+    case 'load-state':
+      return {
+        ...action.payload,
+        isLoading: false,
+        user: state.user
+      }
     // User actions
     case 'receive-login':
+      let loginFailed = action.payload === undefined ? true : false
+      saveUserToLocalStorage(action.payload === undefined ? null : action.payload)  // TODO check if still needed
       return {
         ...state,
         user: action.payload,
+        loginFailed : loginFailed
       }
-    case 'logout':
+    case 'load-user':
       return {
         ...state,
-        user: null,
+        user: getUserFromLocalStorage()
+      }
+    case 'logout':
+      localStorage.removeItem('user');
+      return {
+        ...initialState,
+        isLoading: false
       }
     // Card actions
     case 'set-cards':
