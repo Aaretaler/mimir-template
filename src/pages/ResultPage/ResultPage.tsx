@@ -25,10 +25,11 @@ export const ResultPage = () => {
     return correctAnswerCount
   }
 
-  const startNewGame = () => {
-    actionCreator({ type: 'delete-game' })
+  const startNewGame =  async () => {
+    await actionCreator({ type: 'delete-game' })
     navigate('/')
     actionCreator({ type: 'create-new-game' })
+    
   }
 
   return (
