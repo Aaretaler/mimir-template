@@ -1,8 +1,9 @@
 export class ServerAPI {
-  static post(url: string, method: string, body: string): any {
+
+  static post(url: string, method: string, body: string, accessToken? : string): any {
     return fetch(url, {
       method: method,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${accessToken}`},
       body: body,
     })
       .then((resp) => {
@@ -19,10 +20,10 @@ export class ServerAPI {
       })
   }
 
-  static get(url: string, method: string): any {
+  static get(url: string, method: string, accessToken?: string): any {
     return fetch(url, {
       method: method,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${accessToken}`},
     })
       .then((resp) => {
         return resp.json()
