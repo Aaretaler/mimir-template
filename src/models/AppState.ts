@@ -7,4 +7,6 @@ export interface AppState {
   user: User | null,
   cards: Card[],
   game: Game
+  loginFailed : boolean
+  isLoading: Boolean
 }
