@@ -11,40 +11,17 @@ function App() {
   console.log('App component rendered')
   return (
     <Routes>
+      
       <Route path="/" element={<Layout />}>
+        {/* Public routes */}
         <Route path="/login" element={<LoginPage />} />
-        <Route
-          path="/result"
-          element={
-            <ProtectedRoute>
-              <ResultPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/edit/:id"
-          element={
-            <ProtectedRoute>
-              <CardEditor />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/cards"
-          element={
-            <ProtectedRoute role="admin">
-              <CardManager />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          index
-          element={
-            <ProtectedRoute>
-              <GamePage />
-            </ProtectedRoute>
-          }
-        />
+
+        {/* Protected routes: Only accessible if logged in */}
+        <Route index element={<ProtectedRoute component={GamePage} />}/>
+        <Route path="/result" element={<ProtectedRoute component={ResultPage} />}/>
+        <Route path="/edit/:id" element={<ProtectedRoute component={CardEditor} />}/>
+        <Route path="/cards" element={<ProtectedRoute component={CardManager} role="admin" />}/>
+        
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Route>
     </Routes>

@@ -1,23 +1,34 @@
-import { useContext } from 'react'
-import { Navigate } from 'react-router-dom'
-import { AppContext } from './store/Context'
+
+import { useContext } from 'react';
+import { Route, Navigate } from 'react-router-dom';
+import { AppContext } from './store/Context';
 
 interface ProtectedRouteProps {
-  children: JSX.Element
+  component: React.ComponentType<any>;
   role?: string
+  [key: string]: any;
 }
 
-const ProtectedRoute = ({ children, role }: ProtectedRouteProps) => {
-  const { user } = useContext(AppContext)
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ component: Component, role, ...rest }) => {
+  const { user, isLoading } = useContext(AppContext)
+  
+  console.warn("isLoading: " + isLoading)
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  
+  console.warn("user: " + JSON.stringify(user))
+  console.warn("accessToken: " + JSON.stringify(user ? user.accessToken : "null"))
 
   if (!user || !user.accessToken) {
-    return <Navigate to="/login" replace />
+    return <Navigate to="/login" />
   }
 
   if (role && !user.roles.includes(role)) {
-    return <Navigate to="/login" replace />
+    return <Navigate to="/login" />
   }
-  return children
-}
+  return <Component {...rest} />
 
-export default ProtectedRoute
+};
+
+export default ProtectedRoute;
