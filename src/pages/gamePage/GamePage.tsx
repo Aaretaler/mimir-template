@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Button } from '../../components/Button'
 import { TextInput } from '../../components/TextInput'
 import styles from './GamePage.module.css'
@@ -20,7 +20,7 @@ export const GamePage = () => {
   }
 
   const checkGameStatus = () => {
-    if (game.answers.length >= game.gameCards.length-1) {
+    if (game.answers.length > 0 && (game.answers.length >= game.gameCards.length)) {
       actionCreator({ type: 'get-result' })
       console.log('navigating result')
       navigate('/result')
@@ -32,6 +32,10 @@ export const GamePage = () => {
     const percent = (game.cardIndex / game.gameCards.length) * 100
     return Math.trunc(percent)
   }
+
+  useEffect(() => {
+    checkGameStatus()
+  }, [game.answers.length])
 
   return (
     <>

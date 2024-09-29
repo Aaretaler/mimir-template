@@ -25,10 +25,11 @@ export const ResultPage = () => {
     return correctAnswerCount
   }
 
-  const startNewGame = () => {
-    actionCreator({ type: 'delete-game' })
+  const startNewGame =  async () => {
+    await actionCreator({ type: 'delete-game' })
     navigate('/')
     actionCreator({ type: 'create-new-game' })
+    
   }
 
   return (
@@ -54,7 +55,9 @@ export const ResultPage = () => {
           <div key={card.front} className={styles.resultRow}>
             <div className={styles.resultCell}>{card.front}</div>
             <div className={styles.resultCell}>{card.back}</div>
-            <div className={styles.resultCell + " " + (game.answers[index]?.toLowerCase() == card.back.toLowerCase() ? styles.right : styles.wrong)}>{game.answers[index]}</div>
+            <div className={styles.resultCell + " " + (game.answers[index]?.toLowerCase() == card.back.toLowerCase() ? styles.right : styles.wrong)}>
+              {game.answers[index] ? game.answers[index] : "No Answer given"}
+            </div>
             <div className={styles.resultCell  + " " + styles.hidden}>
               {game.answers[index]?.toLowerCase() == card.back.toLowerCase() ? (
                 <>&#x2713;</>

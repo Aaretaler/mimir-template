@@ -12,6 +12,10 @@ type ReceiveLoginAction = {
   payload: User
 }
 
+type LoadUserAction = {
+  type: 'load-user'
+}
+
 type LogoutAction = {
   type: 'logout'
 }
@@ -20,3 +24,4 @@ export type UserAction =
   | SendLoginAction
   | ReceiveLoginAction
   | LogoutAction
+  | LoadUserAction

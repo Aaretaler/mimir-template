@@ -8,17 +8,21 @@ import { useNavigate } from 'react-router-dom'
 
 export const LoginPage = () => {
   const navigate = useNavigate()
-  const { user } = useContext(AppContext)
+  const { user, loginFailed } = useContext(AppContext)
   let [username, setUsername] = useState('')
   let [password, setPassword] = useState('')
-  let [attemptFailed, setAttemptFailed] = useState(false)
+  let [loginButtonPressed, setLoginButtonPressed] = useState(false)
 
   const login = async () => {
-    const result = await actionCreator({ type: 'send-login', payload: { username: username, password: password } })
+    setLoginButtonPressed(true) // Avoids navigating away from the page when already logged in (user change)
+    actionCreator({ type: 'send-login', payload: { username: username, password: password } })
+
+    console.warn("loginFailed: " + loginFailed)
   }
 
   useEffect(() => {
-    if (user) {
+    if (user && loginButtonPressed) {
+      actionCreator({ type: 'get-state'})
       navigate('/')
     }
   }, [user, navigate]) 
@@ -39,10 +43,7 @@ export const LoginPage = () => {
         onChange={setPassword}
       />
       <Button title="Login" clickHandler={login} />
-      {attemptFailed && <div className={styles.warning}>Invalid Credentials</div>}
-      <div className={styles.TableHeader}>
-        {user ? "Actual user: " + user.username : "No User Logged in"}
-      </div>
+      {loginFailed && <div className={styles.warning}>Invalid Credentials</div>}
     </div>
   )
 }
