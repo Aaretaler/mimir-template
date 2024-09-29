@@ -44,9 +44,6 @@ export const LoginPage = () => {
       />
       <Button title="Login" clickHandler={login} />
       {loginFailed && <div className={styles.warning}>Invalid Credentials</div>}
-      <div className={styles.TableHeader}>
-        {user ? "Actual user: " + user.username : "No User Logged in"}
-      </div>
     </div>
   )
 }
