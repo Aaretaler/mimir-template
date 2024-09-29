@@ -1,4 +1,4 @@
-import { ServerAPI } from '../ServerAPI'
+import { get, post } from '../ServerAPI'
 import { AppStore } from '../Context'
 import { AppAction } from './AppAction'
 
@@ -55,21 +55,21 @@ export const actionCreator = async (action: AppAction) => {
       body = JSON.stringify(action.payload)
       break
     case 'get-state':
-        url += `/state`
-        method = 'GET'
-        actionType = 'load-state'
-        break
+      url += `/state`
+      method = 'GET'
+      actionType = 'load-state'
+      break
     default:
       console.error('Unknown action: ' + action.type)
   }
 
   if (method === 'GET') {
-    await ServerAPI.get(url, method, accessToken).then((data: any) => {
+    await get(url, method, accessToken).then((data: any) => {
       console.log(data)
       AppStore.dispatch({ type: actionType, payload: data })
     })
   } else {
-    await ServerAPI.post(url, method, body, accessToken).then((data: any) => {
+    await post(url, method, body, accessToken).then((data: any) => {
       AppStore.dispatch({ type: actionType, payload: data })
     })
   }
