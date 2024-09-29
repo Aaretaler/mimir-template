@@ -28,7 +28,7 @@ export const AppBar = () => {
   const getButtonCaption = () => {
     if (!game) return 'New Game'
 
-    if (game.answers.length >= 3) return 'Finished'
+    if (game.answers.length > 0 && (game.answers.length >= game.gameCards.length)) return 'Finished'
     return game.gameCards.length == 0
       ? 'New Game'
       : 'Solve #' + (game.cardIndex + 1)
@@ -48,7 +48,7 @@ export const AppBar = () => {
           <Button
             title={getButtonCaption()}
             clickHandler={() => {
-              navigate(game.answers.length >= 3 ? '/result' : '/')
+              navigate((game.answers.length > 0 && (game.answers.length >= game.gameCards.length)) ? '/result' : '/')
             }}
           />
         </div>
