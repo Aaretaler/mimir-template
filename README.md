@@ -1,33 +1,24 @@
-# @Tobias
+# Mimir API
 
-The following assumptions have been made:
+# Users
 
-- Filter & Sort mechanisms from Web 1 have been removed to match the requirements shown in the example video.
+User the following credentials to test the application:
 
-# React + TypeScript + Vite
+|Username|Password|Roles|
+|--------|--------|-----|
+|player|player|[player]|
+|admin|admin|[admin]|
+|tobi|buechel|[player, admin]|
+|reto|kunz|[player, admin]|
+|sven|sprey|[player, admin]|
+|christoph|strube|[player, admin]|
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Remarks
 
-Currently, two official plugins are available:
+Mit Tobi diskutiert Abweichungen von der Spezifikation:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- User-Role ist eine 1-n Beziehung.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Die findings aus Web2 wurden soweit möglich behoben.
+Wir nehmen zur Kenntnis, dass ActionCreator.ts sehr schlecht skaliert und der Appstore nicht exportiert werden soll.
+Dies zu beheben bedingt allerdings eine komplette Überarbeitung unserer Architektur und wurde deshalb so belassen. Gerne nehmen wir Feedback entegegen, wie so etwas sauber und skalierbar aufgebaut werden kann.
