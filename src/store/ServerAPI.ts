@@ -1,35 +1,47 @@
 export class ServerAPI {
 
-  static post(url: string, method: string, body: string, accessToken? : string): any {
-    return fetch(url, {
-      method: method,
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${accessToken}`},
-      body: body,
-    })
-      .then((resp) => {
-        //TODO refactor
-        const response = resp.json()
-        console.log(resp.ok)
-        console.log(response)
+  static async post(url: string, method: string, body: string, accessToken?: string): Promise<any> {
+    try {
+      const response = await fetch(url, {
+        method: method,
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken || ''}`
+        },
+        body: body,
+      });
 
-        if(resp.ok) return response
-      })
-      .catch(e => {
-        console.log('Server Error:' + e)
-        alert('Server Error:' + e)
-      })
+      if (!response.ok) {
+        throw new Error(`Server Error: ${response.statusText}`);
+      }
+
+      return await response.json();
+
+    } catch (e: any) {
+      console.error('Server Error:', e); 
+      alert('Server Error: ' + e.message);
+    }
   }
 
-  static get(url: string, method: string, accessToken?: string): any {
-    return fetch(url, {
-      method: method,
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${accessToken}`},
-    })
-      .then((resp) => {
-        return resp.json()
-      })
-      .catch(e => {
-        alert('Server Error:' + e)
-      })
+  static async get(url: string, method: string, accessToken?: string): Promise<any> {
+    try {
+      const response = await fetch(url, {
+        method: method,
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken || ''}`
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server Error: ${response.statusText}`);
+      }
+      
+      return await response.json();
+
+    } catch (e: any) {
+      console.error('Server Error:', e);
+      alert('Server Error: ' + e.message);
+    }
   }
 }
