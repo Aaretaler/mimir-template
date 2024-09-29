@@ -2,6 +2,7 @@ import { createContext, ReactNode, useReducer, useEffect } from 'react'
 import { AppState } from '../models/AppState'
 import { AppReducer } from './AppReducer'
 import { AppAction } from './actions/AppAction'
+import { getUserFromLocalStorage } from '../models/User'
 
 interface IAppState extends AppState {
   dispatch: (action: AppAction) => void
@@ -29,7 +30,14 @@ export const AppProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const abortController = new AbortController()
-    fetch(url, { signal: abortController.signal })
+    const accessToken = getUserFromLocalStorage()?.accessToken
+
+    fetch(url, {
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken || null}`
+          },
+        signal: abortController.signal} )
       .then(response => {
         if (!response.ok) {
           throw Error('failed to fetch data for that resource')
@@ -39,8 +47,8 @@ export const AppProvider = ({ children }: Props) => {
       .then(data => {
         dispatch({ type: 'set-cards', payload: data.cards })
         dispatch({ type: 'load-game', payload: data.game })
-        dispatch({ type: 'load-user'})
-        dispatch({ type: 'set-loading', payload: false})
+        dispatch({ type: 'load-user' })
+        dispatch({ type: 'set-loading', payload: false })
       })
       .catch(err => {
         if (err.name === 'AbortError') {
