@@ -3,9 +3,6 @@ import {
   cleanup,
   render,
   screen,
-  waitFor,
-  waitForElementToBeRemoved,
-  within,
 } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import { http, HttpResponse } from 'msw'
@@ -23,9 +20,7 @@ import App from '../App.tsx'
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { AppProvider } from '../store/Context.tsx'
-
-const startNewGame = vitest.fn()
-
+vitest.fn()
 const handlers = [
   http.post('/api/game', async () => {
     return HttpResponse.json({
