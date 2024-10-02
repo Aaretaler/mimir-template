@@ -43,7 +43,7 @@ export const LoginPage = () => {
         onChange={setPassword}
       />
       <Button title="Login" clickHandler={login} />
-      {loginFailed && <div className={styles.warning}>Invalid Credentials</div>}
+      {loginFailed && <div className={styles.warning}> {'\u26A0'} Invalid Credentials</div>}
     </div>
   )
 }

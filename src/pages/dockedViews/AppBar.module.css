@@ -33,6 +33,7 @@
   margin-left: 10px; 
   font-size: var(--font-size-content);
   color: var(--secondary-color);
+  align-self: end;
 }
 
 .burgerMenuButton {
@@ -58,6 +59,11 @@
   justify-content:space-between;
   height: 100vh;
   margin: 15px;
+}
+.burgerMenuTop
+{
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 600px) {

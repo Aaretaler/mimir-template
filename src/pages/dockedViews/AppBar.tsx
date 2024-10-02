@@ -70,6 +70,7 @@ export const AppBar = () => {
         {isMenuShown ? (
           <div className={styles.burgerMenu}>
             <div className={styles.buttonsInBurgerMenue}>
+              <div className={styles.burgerMenuTop}>
               <Button
                 title={getButtonCaption()}
                 clickHandler={() => {
@@ -86,6 +87,7 @@ export const AppBar = () => {
                   }}
                 />
               )}
+              </div>
               <Button
                 title="Logout"
                 clickHandler={() => {
