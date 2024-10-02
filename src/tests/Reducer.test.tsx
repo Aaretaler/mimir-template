@@ -9,6 +9,8 @@ import { AppReducer } from '../store/AppReducer.ts'
 
 describe('AppReducer', () => {
   // Beispiel-Initialzustand
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   const initialState: AppState = {
     user: null,
     cards: [],
