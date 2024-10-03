@@ -43,7 +43,7 @@ export const AppBar = () => {
     }
   }
 
-  const authButtonCaption = user ? 'Logout' : 'Login'
+  const authButtonCaption = user ? 'Logout' : 'Anmelden'
 
   return (
     <>

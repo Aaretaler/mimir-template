@@ -50,7 +50,7 @@ describe('Login', () => {
         </BrowserRouter>
       </React.StrictMode>
     )
-    await user.click(screen.getByRole('button', { name: /Logout/ }))
+    await user.click(screen.getByRole('button', { name: 'Anmelden' }))
     // Ensure we're on the login page
     expect(screen.getByPlaceholderText(/Username/)).toBeInTheDocument()
     expect(screen.getByPlaceholderText(/Password/)).toBeInTheDocument()
@@ -58,7 +58,7 @@ describe('Login', () => {
     await user.type(screen.getByPlaceholderText(/Username/), 'player')
     await user.type(screen.getByPlaceholderText(/Password/), 'player')
 
-    await user.click(screen.getByRole('button', { name: /Login/ }))
+    await user.click(screen.getByRole('button', { name: 'Login' }))
 
     await waitFor(() => {
       expect(loginPlayerFn).toHaveBeenCalledWith({
@@ -95,11 +95,11 @@ describe('Login', () => {
         </BrowserRouter>
       </React.StrictMode>
     )
-    await user.click(screen.getByRole('button', { name: /Logout/ }))
+    await user.click(screen.getByRole('button', { name: 'Anmelden' }))
     await user.type(screen.getByPlaceholderText(/Username/), 'wronguser')
     await user.type(screen.getByPlaceholderText(/Password/), 'wrongpass')
 
-    await user.click(screen.getByRole('button', { name: /Login/ }))
+    await user.click(screen.getByRole('button', { name: 'Login' }))
 
     // Check for error message
     await waitFor(() => {

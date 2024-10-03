@@ -61,10 +61,10 @@ afterAll(() => server.close())
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 async function loginUser(user: userEvent.UserEvent) {
-  await user.click(screen.getByRole('button', { name: /Logout/ }))
+  await user.click(screen.getByRole('button', { name: 'Anmelden' }))
   await user.type(screen.getByPlaceholderText(/Username/), 'admin')
   await user.type(screen.getByPlaceholderText(/Password/), 'admin')
-  await user.click(screen.getByRole('button', { name: /Login/ }))
+  await user.click(screen.getByRole('button', { name: 'Login' }))
   await waitFor(() => expect(screen.queryByText(/Invalid Credentials/)).not.toBeInTheDocument())
 }
 
