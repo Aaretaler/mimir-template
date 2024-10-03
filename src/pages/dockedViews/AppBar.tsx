@@ -33,6 +33,7 @@ export const AppBar = () => {
       ? 'New Game'
       : 'Solve #' + (game.cardIndex + 1)
   }
+  
   return (
     <>
       <div className={styles.appBar}>
@@ -54,13 +55,15 @@ export const AppBar = () => {
         </div>
         <div className={styles.flexChildRight}>
           {user?.roles.includes('admin') && <MenuItem />}
-          <Button
-            title="Logout"
-            clickHandler={() => {
-              AppStore.dispatch({ type: 'logout' })
-              navigate('/login')
-            }}
-          />
+          {user && ( // Zeigt den Logout-Button nur an, wenn ein Benutzer eingeloggt ist
+            <Button
+              title="Logout"
+              clickHandler={() => {
+                AppStore.dispatch({ type: 'logout' })
+                navigate('/login')
+              }}
+            />
+          )}
         </div>
         <div className={styles.burgerMenuButton}>
           <div onClick={() => setMenuVisibility(!isMenuShown)}>
@@ -88,14 +91,16 @@ export const AppBar = () => {
                 />
               )}
               </div>
-              <Button
-                title="Logout"
-                clickHandler={() => {
-                  setMenuVisibility(!isMenuShown)
-                  AppStore.dispatch({ type: 'logout' })
-                  navigate('/login')
-                }}
-              />
+              {user && ( 
+                <Button
+                  title="Logout"
+                  clickHandler={() => {
+                    setMenuVisibility(!isMenuShown)
+                    AppStore.dispatch({ type: 'logout' })
+                    navigate('/login')
+                  }}
+                />
+              )}
             </div>
           </div>
         ) : (
