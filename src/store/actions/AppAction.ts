@@ -5,7 +5,7 @@ import { UserAction } from './UserAction'
 
 type SetLoadingAction = {
   type: 'set-loading'
-  payload: Boolean
+  payload: boolean
 }
 
 type GetStateAction = {

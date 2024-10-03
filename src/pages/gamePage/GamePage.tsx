@@ -11,7 +11,7 @@ export const GamePage = () => {
   const { game } = useContext(AppContext)
   const navigate = useNavigate()
 
-  let [answer, setAnswer] = useState('')
+  const [answer, setAnswer] = useState('')
 
   const handleAnswerSubmission = () => {
     actionCreator({ type: 'submit-answer', payload: answer })
