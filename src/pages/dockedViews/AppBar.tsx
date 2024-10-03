@@ -33,7 +33,18 @@ export const AppBar = () => {
       ? 'New Game'
       : 'Solve #' + (game.cardIndex + 1)
   }
-  
+
+  const handleAuthButtonClick = () => {
+    if (user) {
+      AppStore.dispatch({ type: 'logout' })
+      navigate('/login')
+    } else {
+      navigate('/login')
+    }
+  }
+
+  const authButtonCaption = user ? 'Logout' : 'Login'
+
   return (
     <>
       <div className={styles.appBar}>
@@ -55,15 +66,10 @@ export const AppBar = () => {
         </div>
         <div className={styles.flexChildRight}>
           {user?.roles.includes('admin') && <MenuItem />}
-          {user && ( 
-            <Button
-              title="Logout"
-              clickHandler={() => {
-                AppStore.dispatch({ type: 'logout' })
-                navigate('/login')
-              }}
-            />
-          )}
+          <Button
+            title={authButtonCaption}
+            clickHandler={handleAuthButtonClick}
+          />
         </div>
         <div className={styles.burgerMenuButton}>
           <div onClick={() => setMenuVisibility(!isMenuShown)}>
@@ -74,33 +80,27 @@ export const AppBar = () => {
           <div className={styles.burgerMenu}>
             <div className={styles.buttonsInBurgerMenue}>
               <div className={styles.burgerMenuTop}>
-              <Button
-                title={getButtonCaption()}
-                clickHandler={() => {
-                  setMenuVisibility(!isMenuShown)
-                  navigate(game.answers.length >= 3 ? '/result' : '/')
-                }}
-              />
-              {user?.roles.includes('admin') && (
                 <Button
-                  title="Manage Cards"
+                  title={getButtonCaption()}
                   clickHandler={() => {
                     setMenuVisibility(!isMenuShown)
-                    navigate('/cards')
+                    navigate(game.answers.length >= 3 ? '/result' : '/')
                   }}
                 />
-              )}
+                {user?.roles.includes('admin') && (
+                  <Button
+                    title="Manage Cards"
+                    clickHandler={() => {
+                      setMenuVisibility(!isMenuShown)
+                      navigate('/cards')
+                    }}
+                  />
+                )}
               </div>
-              {user && ( 
-                <Button
-                  title="Logout"
-                  clickHandler={() => {
-                    setMenuVisibility(!isMenuShown)
-                    AppStore.dispatch({ type: 'logout' })
-                    navigate('/login')
-                  }}
-                />
-              )}
+              <Button
+                title={authButtonCaption}
+                clickHandler={handleAuthButtonClick}
+              />
             </div>
           </div>
         ) : (
