@@ -55,7 +55,7 @@ export const AppBar = () => {
         </div>
         <div className={styles.flexChildRight}>
           {user?.roles.includes('admin') && <MenuItem />}
-          {user && ( // Zeigt den Logout-Button nur an, wenn ein Benutzer eingeloggt ist
+          {user && ( 
             <Button
               title="Logout"
               clickHandler={() => {
