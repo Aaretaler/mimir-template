@@ -12,14 +12,10 @@ interface ProtectedRouteProps {
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ component: Component, role, ...rest }) => {
   const { user, isLoading } = useContext(AppContext)
   
-  console.warn("isLoading: " + isLoading)
   if (isLoading) {
     return <div>Loading...</div>;
   }
   
-  console.warn("user: " + JSON.stringify(user))
-  console.warn("accessToken: " + JSON.stringify(user ? user.accessToken : "null"))
-
   if (!user || !user.accessToken) {
     return <Navigate to="/login" />
   }
