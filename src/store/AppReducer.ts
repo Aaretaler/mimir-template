@@ -53,12 +53,8 @@ export function AppReducer(state: AppState, action: AppAction): AppState {
         cards: state.cards.filter(card => card.id !== action.payload.id),
       }
     // game actions
-    case 'load-game':
-      return {
-        ...state,
-        game: action.payload,
-      }
     case 'new-game':
+    case 'load-game':
       return {
         ...state,
         game: action.payload,
