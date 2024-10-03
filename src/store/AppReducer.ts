@@ -18,7 +18,7 @@ export function AppReducer(state: AppState, action: AppAction): AppState {
       }
     // User actions
     case 'receive-login':
-      let loginFailed = action.payload === undefined ? true : false
+      const loginFailed = action.payload === undefined ? true : false
       saveUserToLocalStorage(action.payload === undefined ? null : action.payload)  // TODO check if still needed
       return {
         ...state,

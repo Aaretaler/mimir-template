@@ -11,8 +11,8 @@ export const CardEditor = () => {
   const { cards } = useContext(AppContext)
   const { id } = useParams<{ id: string }>()
   const card = cards.find(card => card.id === id)
-  let [back, setBack] = useState(card ? card.back : '')
-  let [front, setFront] = useState(card ? card.front : '')
+  const [back, setBack] = useState(card ? card.back : '')
+  const [front, setFront] = useState(card ? card.front : '')
 
   const handleEditClick = () => {
     if (!card) return

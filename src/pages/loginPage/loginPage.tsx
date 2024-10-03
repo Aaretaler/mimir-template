@@ -9,9 +9,9 @@ import { useNavigate } from 'react-router-dom'
 export const LoginPage = () => {
   const navigate = useNavigate()
   const { user, loginFailed } = useContext(AppContext)
-  let [username, setUsername] = useState('')
-  let [password, setPassword] = useState('')
-  let [loginButtonPressed, setLoginButtonPressed] = useState(false)
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [loginButtonPressed, setLoginButtonPressed] = useState(false)
 
   const login = async () => {
     setLoginButtonPressed(true) // Avoids navigating away from the page when already logged in (user change)

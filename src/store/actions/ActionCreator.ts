@@ -7,7 +7,7 @@ export const actionCreator = async (action: AppAction) => {
   let method = 'GET'
   let body: string = ''
   let actionType = action.type
-  let accessToken = AppStore.user?.accessToken
+  const accessToken = AppStore.user?.accessToken
 
   switch (action.type) {
     // game

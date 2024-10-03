@@ -8,5 +8,5 @@ export interface AppState {
   cards: Card[],
   game: Game
   loginFailed : boolean
-  isLoading: Boolean
+  isLoading: boolean
 }
