@@ -26,7 +26,7 @@ interface Props {
 
 export const AppProvider = ({ children }: Props) => {
   const [state, dispatch] = useReducer(AppReducer, initialState)
-  const url = 'api/state'
+  const url = '/api/state'
 
   useEffect(() => {
     const abortController = new AbortController()
